@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Financial | LuxNest Realty</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+   <div class="container navbar-container">
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
+    <span>LuxNest Realty</span>
+  </div>
+  <ul class="navbar-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="property-listings.html">Listings</a>
+    <a href="agent.html">Agents</a>
+    <a href="financial.html" aria-current="page">Finance</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="testimonials.html">testimonials</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="btn-login">Login</a>
+  </ul>
+  <div class="navbar-icons">
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+</nav>
+    </div>
+  </header>
+
+
+  <main class="financial-page">
+    <section class="hero-financial">
+      <h1>Financial Tools & Guidance</h1>
+      <p>Understand your home financing options and calculate your affordability.</p>
+    </section>
+
+    <section class="loan-info">
+      <h2>Popular Loan Programs</h2>
+      <div class="loan-grid">
+        <div class="loan-card">
+          <h3>Fixed-Rate Mortgage</h3>
+          <p>Stable monthly payments over a set term. Ideal for long-term planning.</p>
+        </div>
+        <div class="loan-card">
+          <h3>Adjustable-Rate Mortgage (ARM)</h3>
+          <p>Lower initial rates that adjust over time. Good for short-term buyers.</p>
+        </div>
+        <div class="loan-card">
+          <h3>FHA Loan</h3>
+          <p>Backed by the government. Great for first-time home buyers with low down payments.</p>
+        </div>
+        <div class="loan-card">
+          <h3>Jumbo Loan</h3>
+          <p>Financing for properties exceeding standard loan limits.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="calculator-section">
+      <h2>Mortgage Calculator</h2>
+      <div class="calculator">
+        <label>Home Price: <input type="number" id="price" placeholder="e.g., 1000000" /></label>
+        <label>Down Payment (%): <input type="number" id="down" placeholder="e.g., 20" /></label>
+        <label>Loan Term (years): <input type="number" id="term" placeholder="e.g., 30" /></label>
+        <label>Interest Rate (%): <input type="number" id="rate" placeholder="e.g., 6.5" /></label>
+        <button onclick="calculateMortgage()">Calculate</button>
+        <p class="result" id="result"></p>
+      </div>
+    </section>
+
+    <section class="financial-contact">
+      <h2>Need Expert Help?</h2>
+      <p>We connect you with experienced mortgage advisors and real estate financial experts.</p>
+      <a href="contact.html" class="btn">Talk to a Specialist</a>
+    </section>
+  </main>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About LuxNest</h3>
+        <p>We help you find your dream property with expert service and trust.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Info</h3>
+        <p>123 Real Estate St, Nairobi, Kenya</p>
+        <p>Email: info@luxnestrealty.com</p>
+        <p>Phone: +254 700 000 000</p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-media">
+        <img src="assets/Free Facebook.jpeg" alt="facebook">
+        <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
+        <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
+        <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 LuxNest Realty. All rights reserved.
+    </div>
+  </footer>
+
+
+  <script>
+    function calculateMortgage() {
+      const price = parseFloat(document.getElementById("price").value);
+      const down = parseFloat(document.getElementById("down").value);
+      const term = parseInt(document.getElementById("term").value);
+      const rate = parseFloat(document.getElementById("rate").value);
+
+      if (isNaN(price) || isNaN(down) || isNaN(term) || isNaN(rate)) {
+        document.getElementById("result").innerText = "Please enter all fields correctly.";
+        return;
+      }
+
+      const principal = price - (price * down / 100);
+      const monthlyRate = rate / 100 / 12;
+      const totalPayments = term * 12;
+
+      const monthly =
+        (principal * monthlyRate) /
+        (1 - Math.pow(1 + monthlyRate, -totalPayments));
+
+      document.getElementById("result").innerText =
+        "Estimated Monthly Payment: $" + monthly.toFixed(2);
+    }
+  </script>
+</body>
+</html>

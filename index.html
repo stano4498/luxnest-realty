@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuxNest Realty | Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="navbar">
+   <div class="container navbar-container">
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
+    <span>LuxNest Realty</span>
+  </div>
+  <ul class="navbar-links" id="navLinks">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="property-listings.html">Listings</a>
+    <a href="agent.html">Agents</a>
+    <a href="financial.html">Finance</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="testimonials.html">testimonials</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="btn-login">Login</a>
+  </ul>
+  <div class="navbar-icons">
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+</nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <h1>Find Your Dream Home with LuxNest Realty</h1>
+        <p class="tagline">Luxury properties. Trusted agents. Exceptional service.</p>
+      </div>
+    </section>
+
+    <!-- Search Bar Section -->
+    <section class="search-section">
+      <div class="container">
+        <form id="property-search-form" class="search-form" aria-label="Property search form">
+          <input type="text" name="location" placeholder="Location (City, ZIP, Neighborhood)" aria-label="Location" />
+          <select name="property-type" aria-label="Property type">
+            <option value="">Property Type</option>
+            <option value="house">House</option>
+            <option value="apartment">Apartment</option>
+            <option value="condo">Condo</option>
+            <option value="commercial">Commercial</option>
+          </select>
+          <select name="price-range" aria-label="Price range">
+            <option value="">Price Range</option>
+            <option value="0-100000">$0 - $100,000</option>
+            <option value="100000-300000">$100,000 - $300,000</option>
+            <option value="300000-600000">$300,000 - $600,000</option>
+            <option value="600000+">$600,000+</option>
+          </select>
+          <select name="bedrooms" aria-label="Number of bedrooms">
+            <option value="">Bedrooms</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+          </select>
+          <button type="submit" class="btn-primary">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="featured-properties">
+      <div class="container">
+        <h2>Featured Properties</h2>
+        <div class="property-grid">
+          <article class="property-card">
+            <img src="assets/8f9c67cf-a041-4c49-9f30-e59f3b678456.jpeg" alt="Luxury villa with pool" />
+            <div class="property-info">
+              <h3>Luxury Villa with Private Pool</h3>
+              <p>Modern Apartment - Westlands</p>
+              <p class="price">$1,250,000</p>
+              <a href="property-listings.html" class="btn-secondary">View Property</a>
+            </div>
+          </article>
+          <article class="property-card">
+            <img src="assets/45 Art Deco Houses That Stand the Test of Time.jpeg" alt="luxury Mansion" />
+            <div class="property-info">
+              <h3>Luxury Mansion </h3>
+              <p>789 City Ave, Runda</p>
+              <p class="price">$850,000</p>
+              <a href="property-listings.html" class="btn-secondary">View Property</a>
+            </div>
+          </article>
+          <article class="property-card">
+            <img src="assets/20 Cozy Small Luxury Houses That Drip with Style.jpeg" alt="Beach Cottage" />
+            <div class="property-info">
+              <h3>>Beachfront Cottage </h3>
+              <p>, Diani beach</p>
+              <p class="price">$560,000</p>
+              <a href="property-listings.html" class="btn-secondary">View Property</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.019640493632!2d36.817244!3d-1.286389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d529ad41ff%3A0xe54b27f7a09779a4!2sNairobi%20Business%20Park!5e0!3m2!1sen!2ske!4v1711043702277"
+        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </section>
+
+    <!-- Email Alerts -->
+    <section class="email-alerts">
+      <div class="container">
+        <h2>Stay Updated with New Listings</h2>
+        <form id="email-alert-form" aria-label="Subscribe to email alerts">
+          <input type="email" name="email" placeholder="Enter your email address" required aria-required="true" />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+        <p class="confirmation-message" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About LuxNest</h3>
+        <p>We help you find your dream property with expert service and trust.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Info</h3>
+        <p>123 Real Estate St, Nairobi, Kenya</p>
+        <p>Email: info@luxnestrealty.com</p>
+        <p>Phone: +254 700 000 000</p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-media">
+        <img src="assets/Free Facebook.jpeg" alt="facebook">
+        <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
+        <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
+        <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 LuxNest Realty. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

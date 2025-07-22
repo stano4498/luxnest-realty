@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - LuxNest Realty</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="auth-page">
+  <div class="auth-container">
+    <h2>Create Your Account</h2>
+    <form id="registerForm" onsubmit="return handleRegister(event)">
+      <input type="text" placeholder="Username" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <input type="password" placeholder="Confirm Password" required />
+      
+      <label class="biometric-check">
+        <input type="checkbox" id="biometricEnroll" />
+        Enroll for biometric login (optional)
+      </label>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+    <p class="auth-switch">Already have an account?
+      <a href="login.html">Login here</a>
+    </p>
+  </div>
+
+  <script>
+    function handleRegister(event) {
+      event.preventDefault();
+      const biometric = document.getElementById("biometricEnroll").checked;
+      alert("Registered successfully!" + (biometric ? " Biometric enrolled." : ""));
+      // Redirect or store logic goes here
+    }
+  </script>
+</body>
+</html>

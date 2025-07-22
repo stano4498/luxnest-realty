@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ | LuxNest Realty</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <style>
+    .faq-page {
+      padding: 3rem 1rem;
+      background: #f7f9fc;
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .faq-search {
+      max-width: 500px;
+      margin: 0 auto 3rem auto;
+      display: flex;
+    }
+    .faq-search input {
+      flex: 1;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem 0 0 0.5rem;
+      font-size: 1rem;
+    }
+    .faq-search button {
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      cursor: pointer;
+    }
+    .faq-section {
+      margin-bottom: 3rem;
+    }
+    .faq-section h3 {
+      color: #003366;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    .faq-item h4 {
+      font-size: 1.1rem;
+      color: #003366;
+      margin-bottom: 0.5rem;
+    }
+    .faq-item p {
+      margin: 0;
+    }
+    .glossary {
+      background: #eaf1fa;
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+    .glossary h4 {
+      margin-top: 1rem;
+      color: #003366;
+    }
+    .glossary p {
+      margin: 0.2rem 0 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+   <div class="container navbar-container">
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
+    <span>LuxNest Realty</span>
+  </div>
+  <ul class="navbar-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="property-listings.html">Listings</a>
+    <a href="agent.html">Agents</a>
+    <a href="financial.html">Finance</a>
+    <a href="FAQ.html" aria-current="page">FAQ</a>
+    <a href="testimonials.html">testimonials</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="btn-login">Login</a>
+  </ul>
+  <div class="navbar-icons">
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+</nav>
+    </div>
+  </header>
+
+    <h1 class="faq-header">Frequently Asked Questions</h1>
+  </header>
+
+  <section class="faq-page">
+    <div class="faq-search">
+      <input type="text" id="faqSearch" placeholder="Search FAQs..." />
+      <button onclick="filterFAQ()">Search</button>
+    </div>
+
+    <!-- Category: Buying -->
+    <div class="faq-section" id="buying">
+      <h3>Buying Property</h3>
+      <div class="faq-item">
+        <h4>What is the first step in buying a home?</h4>
+        <p>Get pre-approved for a mortgage and consult a real estate agent to understand your buying power and market options.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What are closing costs?</h4>
+        <p>Closing costs are fees paid at the end of a transaction, including legal, title, and lender fees.</p>
+      </div>
+    </div>
+
+    <!-- Category: Selling -->
+    <div class="faq-section" id="selling">
+      <h3>Selling Property</h3>
+      <div class="faq-item">
+        <h4>How do I determine the value of my home?</h4>
+        <p>Use our free home valuation tool or request a professional CMA (Comparative Market Analysis) from an agent.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How long does it take to sell a property?</h4>
+        <p>It varies by market, but typically 30-90 days from listing to closing with proper pricing and staging.</p>
+      </div>
+    </div>
+
+    <!-- Category: Rentals -->
+    <div class="faq-section" id="rentals">
+      <h3>Renting Property</h3>
+      <div class="faq-item">
+        <h4>What documents do I need to rent a property?</h4>
+        <p>You usually need identification, proof of income, references, and sometimes a credit report.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Are pets allowed in rentals?</h4>
+        <p>This depends on the property owner. Always check the lease agreement before signing.</p>
+      </div>
+    </div>
+
+    <!-- Glossary -->
+    <div class="glossary">
+      <h3>Real Estate Glossary</h3>
+      <h4>Appraisal</h4>
+      <p>An estimate of a property's value conducted by a licensed professional.</p>
+      <h4>Escrow</h4>
+      <p>A financial arrangement where a third party holds funds until conditions of the sale are met.</p>
+      <h4>Equity</h4>
+      <p>The difference between the market value of a property and what is owed on the mortgage.</p>
+    </div>
+  </section>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About LuxNest</h3>
+        <p>We help you find your dream property with expert service and trust.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Info</h3>
+        <p>123 Real Estate St, Nairobi, Kenya</p>
+        <p>Email: info@luxnestrealty.com</p>
+        <p>Phone: +254 700 000 000</p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-media">
+        <img src="assets/Free Facebook.jpeg" alt="facebook">
+        <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
+        <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
+        <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 LuxNest Realty. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JSON-LD Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the first step in buying a home?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Get pre-approved for a mortgage and consult a real estate agent to understand your buying power and market options."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are closing costs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Closing costs are fees paid at the end of a transaction, including legal, title, and lender fees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I determine the value of my home?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use our free home valuation tool or request a professional CMA (Comparative Market Analysis) from an agent."
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

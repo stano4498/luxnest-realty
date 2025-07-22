@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuxNest Realty - Testimonials</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f9;
+      margin: 0;
+      padding: 2rem;
+      color: #003366;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    .testimonials-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    .client-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #003366;
+      margin-bottom: 1rem;
+    }
+    .client-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #0057b7;
+    }
+    .client-location {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    .testimonial-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #222;
+      max-height: 12rem;
+      overflow-y: auto;
+    }
+    /* Scrollbar styling for overflow */
+    .testimonial-text::-webkit-scrollbar {
+      width: 6px;
+    }
+    .testimonial-text::-webkit-scrollbar-thumb {
+      background-color: #003366;
+      border-radius: 3px;
+    }
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+      .testimonial-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="navbar">
+   <div class="container navbar-container">
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
+    <span>LuxNest Realty</span>
+  </div>
+  <ul class="navbar-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="property-listings.html">Listings</a>
+    <a href="agent.html">Agents</a>
+    <a href="financial.html">Finance</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="testimonials.html" aria-current="page">testimonials</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="btn-login">Login</a>
+  </ul>
+  <div class="navbar-icons">
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+</nav>
+    </div>
+  </header>
+
+
+  <h1>What Our Clients Say</h1>
+
+  <div class="testimonials-container">
+
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client Photo" class="client-photo" />
+      <div class="client-name">Sophia Mitchell</div>
+      <div class="client-location">Nairobi, Kenya</div>
+      <p class="testimonial-text">
+        "LuxNest Realty made buying our first home an absolute pleasure. Their team was attentive, knowledgeable, and always available to answer our questions. We felt supported every step of the way!"
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client Photo" class="client-photo" />
+      <div class="client-name">David Mwangi</div>
+      <div class="client-location">Mombasa, Kenya</div>
+      <p class="testimonial-text">
+        "Selling our commercial property through LuxNest was seamless. Their negotiation skills got us a great price above our expectations. Highly recommend their professionalism and expertise."
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Client Photo" class="client-photo" />
+      <div class="client-name">Grace Kamau</div>
+      <div class="client-location">Kisumu, Kenya</div>
+      <p class="testimonial-text">
+        "As an investor, I appreciate how LuxNest Realty provides detailed market insights and transparent advice. Their guidance helped me grow my portfolio smartly and confidently."
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Client Photo" class="client-photo" />
+      <div class="client-name">James Otieno</div>
+      <div class="client-location">Nakuru, Kenya</div>
+      <p class="testimonial-text">
+        "The rental process was fast and hassle-free with LuxNest Realty. The agents listened carefully to our needs and found the perfect place for our family within budget."
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Client Photo" class="client-photo" />
+      <div class="client-name">Emily Wanjiku</div>
+      <div class="client-location">Eldoret, Kenya</div>
+      <p class="testimonial-text">
+        "LuxNest’s team is highly professional and trustworthy. They helped me through every legal step when buying my home, making the entire process stress-free and clear."
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Client Photo" class="client-photo" />
+      <div class="client-name">Michael Njoroge</div>
+      <div class="client-location">Thika, Kenya</div>
+      <p class="testimonial-text">
+        "Excellent service and great communication! LuxNest Realty exceeded my expectations in finding a perfect investment property quickly and at a great price."
+      </p>
+    </div>
+
+  </div>
+
+    <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About LuxNest</h3>
+        <p>We help you find your dream property with expert service and trust.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="properties.html">Properties</a>
+        <a href="agents.html">Agents</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Info</h3>
+        <p>123 Real Estate St, Nairobi, Kenya</p>
+        <p>Email: info@luxnestrealty.com</p>
+        <p>Phone: +254 700 000 000</p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-media">
+        <img src="assets/Free Facebook.jpeg" alt="facebook">
+        <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
+        <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
+        <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 LuxNest Realty. All rights reserved.
+    </div>
+  </footer>
+
+
+</body>
+</html>
