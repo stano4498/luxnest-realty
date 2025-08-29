@@ -1,212 +1,839 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LuxNest Realty - Testimonials</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f4f9;
-      margin: 0;
-      padding: 2rem;
-      color: #003366;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-weight: 700;
-    }
-    .testimonials-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .testimonial-card {
-      background: #ffffff;
-      border-radius: 1rem;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .testimonial-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-    }
-    .client-photo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #003366;
-      margin-bottom: 1rem;
-    }
-    .client-name {
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: #0057b7;
-    }
-    .client-location {
-      font-style: italic;
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-    .testimonial-text {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #222;
-      max-height: 12rem;
-      overflow-y: auto;
-    }
-    /* Scrollbar styling for overflow */
-    .testimonial-text::-webkit-scrollbar {
-      width: 6px;
-    }
-    .testimonial-text::-webkit-scrollbar-thumb {
-      background-color: #003366;
-      border-radius: 3px;
-    }
-    @media (max-width: 480px) {
-      body {
-        padding: 1rem;
-      }
-      .testimonial-card {
-        padding: 1.5rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Testimonials - Luxnest-Realty</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e40af;
+            --light-blue: #3b82f6;
+            --dark-blue: #1e3a8a;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #1f2937;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --gold: #fbbf24;
+        }
+
+        [data-theme="dark"] {
+            --white: #1f2937;
+            --light-gray: #111827;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--light-gray);
+            padding: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--primary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-rating {
+            display: flex;
+            gap: 0.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .property-type {
+            display: inline-block;
+            background: var(--light-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-blue);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+
+        .btn-white:hover {
+            background: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--light-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--light-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-<header class="navbar">
-   <div class="container navbar-container">
-      <nav class="navbar">
-  <div class="navbar-logo">
-    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
-    <span>LuxNest Realty</span>
-  </div>
-  <ul class="navbar-links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="property-listings.html">Listings</a>
-    <a href="agent.html">Agents</a>
-    <a href="financial.html">Finance</a>
-    <a href="FAQ.html">FAQ</a>
-    <a href="testimonials.html" aria-current="page">testimonials</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html" class="btn-login">Login</a>
-  </ul>
-  <div class="navbar-icons">
-    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  </div>
-</nav>
-    </div>
-  </header>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                Luxnest-Realty
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="property.html">Properties</a></li>
+                <li><a href="agent.html">Agents</a></li>
+                <li><a href="financial.html">Financing</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                <li><a href="testimonials.html" class="active">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="contact.html" class="btn btn-primary">Get Started</a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>What Our Clients Say</h1>
+                <p>Discover why thousands of families trust Luxnest-Realty to find their perfect home and make their real estate dreams come true</p>
+            </div>
+        </section>
 
-  <h1>What Our Clients Say</h1>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">2,500+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="testimonials-container">
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Client Success Stories</h2>
+                    <p>Read authentic reviews from our satisfied clients who found their dream properties with our expert guidance</p>
+                </div>
 
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client Photo" class="client-photo" />
-      <div class="client-name">Sophia Mitchell</div>
-      <div class="client-location">Nairobi, Kenya</div>
-      <p class="testimonial-text">
-        "LuxNest Realty made buying our first home an absolute pleasure. Their team was attentive, knowledgeable, and always available to answer our questions. We felt supported every step of the way!"
-      </p>
-    </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterTestimonials('all')">All Reviews</button>
+                    <button class="filter-btn" onclick="filterTestimonials('buyers')">Home Buyers</button>
+                    <button class="filter-btn" onclick="filterTestimonials('sellers')">Home Sellers</button>
+                    <button class="filter-btn" onclick="filterTestimonials('renters')">Renters</button>
+                </div>
 
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client Photo" class="client-photo" />
-      <div class="client-name">David Mwangi</div>
-      <div class="client-location">Mombasa, Kenya</div>
-      <p class="testimonial-text">
-        "Selling our commercial property through LuxNest was seamless. Their negotiation skills got us a great price above our expectations. Highly recommend their professionalism and expertise."
-      </p>
-    </div>
+                <div class="testimonials-grid" id="testimonials-grid">
+                    <!-- Testimonials will be loaded here -->
+                </div>
+            </div>
+        </section>
 
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Client Photo" class="client-photo" />
-      <div class="client-name">Grace Kamau</div>
-      <div class="client-location">Kisumu, Kenya</div>
-      <p class="testimonial-text">
-        "As an investor, I appreciate how LuxNest Realty provides detailed market insights and transparent advice. Their guidance helped me grow my portfolio smartly and confidently."
-      </p>
-    </div>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Join Our Success Stories?</h2>
+                <p>Let us help you find your perfect property and create your own success story</p>
+                <a href="contact.html" class="btn btn-white">Start Your Journey Today</a>
+            </div>
+        </section>
+    </main>
 
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Client Photo" class="client-photo" />
-      <div class="client-name">James Otieno</div>
-      <div class="client-location">Nakuru, Kenya</div>
-      <p class="testimonial-text">
-        "The rental process was fast and hassle-free with LuxNest Realty. The agents listened carefully to our needs and found the perfect place for our family within budget."
-      </p>
-    </div>
-
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Client Photo" class="client-photo" />
-      <div class="client-name">Emily Wanjiku</div>
-      <div class="client-location">Eldoret, Kenya</div>
-      <p class="testimonial-text">
-        "LuxNest’s team is highly professional and trustworthy. They helped me through every legal step when buying my home, making the entire process stress-free and clear."
-      </p>
-    </div>
-
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Client Photo" class="client-photo" />
-      <div class="client-name">Michael Njoroge</div>
-      <div class="client-location">Thika, Kenya</div>
-      <p class="testimonial-text">
-        "Excellent service and great communication! LuxNest Realty exceeded my expectations in finding a perfect investment property quickly and at a great price."
-      </p>
-    </div>
-
-  </div>
-
-    <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-about">
-        <h3>About LuxNest</h3>
-        <p>We help you find your dream property with expert service and trust.</p>
-      </div>
-      <div class="footer-links">
-        <h3>Quick Links</h3>
-        <a href="index.html">Home</a>
-        <a href="properties.html">Properties</a>
-        <a href="agents.html">Agents</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-contact">
-        <h3>Contact Info</h3>
-        <p>123 Real Estate St, Nairobi, Kenya</p>
-        <p>Email: info@luxnestrealty.com</p>
-        <p>Phone: +254 700 000 000</p>
-      </div>
-      <div class="footer-social">
-        <h3>Follow Us</h3>
-        <div class="social-media">
-        <img src="assets/Free Facebook.jpeg" alt="facebook">
-        <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
-        <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
-        <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxnest-Realty</h3>
+                    <p>Kenya's premier real estate agency specializing in luxury properties and international investments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="property.html">Properties</a>
+                    <a href="agent.html">Our Agents</a>
+                    <a href="financial.html">Financing</a>
+                    <a href="contact.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Property Valuation</a>
+                    <a href="#">Property Management</a>
+                    <a href="#">Legal Services</a>
+                    <a href="#">Investment Consulting</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi, Kenya</p>
+                    <p><i class="fas fa-phone"></i> +254 700 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@luxnest-realty.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Luxnest-Realty. All rights reserved. | Licensed Real Estate Agency</p>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 LuxNest Realty. All rights reserved.
-    </div>
-  </footer>
+    </footer>
 
+    <script>
+        // Testimonials data
+        const testimonials = [
+            {
+                id: 1,
+                name: "Sarah Johnson",
+                role: "First-time Home Buyer",
+                category: "buyers",
+                content: "Working with Luxnest-Realty was an absolute dream! As a first-time buyer, I was nervous about the process, but their team guided me through every step. They found me the perfect starter home in my budget and made the entire experience stress-free. I couldn't be happier with my new place!",
+                rating: 5,
+                propertyType: "Starter Home"
+            },
+            {
+                id: 2,
+                name: "Michael Chen",
+                role: "Property Investor",
+                category: "buyers",
+                content: "I've worked with many real estate agencies over the years, but Luxnest-Realty stands out for their market knowledge and professionalism. They helped me identify and purchase three investment properties that have already shown excellent returns. Their expertise in market analysis is unmatched.",
+                rating: 5,
+                propertyType: "Investment Properties"
+            },
+            {
+                id: 3,
+                name: "Emily Rodriguez",
+                role: "Home Seller",
+                category: "sellers",
+                content: "Selling our family home was emotional, but the Luxnest-Realty team made it so much easier. They priced our home perfectly, staged it beautifully, and had multiple offers within a week! We sold for above asking price and couldn't be more grateful for their expertise.",
+                rating: 5,
+                propertyType: "Family Home"
+            },
+            {
+                id: 4,
+                name: "David Thompson",
+                role: "Luxury Home Buyer",
+                category: "buyers",
+                content: "When searching for our luxury waterfront property, we needed agents who understood the high-end market. Luxnest-Realty exceeded our expectations with their attention to detail, discretion, and access to exclusive listings. They found us our dream home with stunning ocean views.",
+                rating: 5,
+                propertyType: "Luxury Waterfront"
+            },
+            {
+                id: 5,
+                name: "Lisa Park",
+                role: "Apartment Renter",
+                category: "renters",
+                content: "Finding the right rental in this competitive market seemed impossible until I worked with Luxnest-Realty. They understood exactly what I was looking for and found me a beautiful downtown apartment with all the amenities I wanted. The process was quick and professional.",
+                rating: 5,
+                propertyType: "Downtown Apartment"
+            },
+            {
+                id: 6,
+                name: "Robert Williams",
+                role: "Commercial Property Buyer",
+                category: "buyers",
+                content: "Purchasing commercial real estate requires specialized knowledge, and Luxnest-Realty delivered exactly that. They helped me find the perfect office building for my growing business, handled all negotiations expertly, and ensured a smooth closing process. Highly recommended for commercial deals.",
+                rating: 5,
+                propertyType: "Commercial Office"
+            },
+            {
+                id: 7,
+                name: "Amanda Foster",
+                role: "Condo Seller",
+                category: "sellers",
+                content: "I was relocating for work and needed to sell my condo quickly. Luxnest-Realty's marketing strategy was incredible - professional photos, virtual tours, and targeted advertising. They sold my condo in just 10 days at full asking price! Their efficiency saved me so much stress.",
+                rating: 5,
+                propertyType: "Downtown Condo"
+            },
+            {
+                id: 8,
+                name: "James Martinez",
+                role: "Family Home Buyer",
+                category: "buyers",
+                content: "With three kids, finding the right family home was crucial. Luxnest-Realty listened to all our needs - good schools, safe neighborhood, big backyard. They showed us homes that truly fit our criteria and helped us negotiate a great deal on our perfect family home.",
+                rating: 5,
+                propertyType: "Suburban Family Home"
+            },
+            {
+                id: 9,
+                name: "Rachel Green",
+                role: "Townhouse Renter",
+                category: "renters",
+                content: "As a young professional, I needed a place that was both affordable and stylish. Luxnest-Realty found me an amazing townhouse rental with modern amenities and a great location. Their rental division is just as professional as their sales team!",
+                rating: 5,
+                propertyType: "Modern Townhouse"
+            },
+            {
+                id: 10,
+                name: "Thomas Anderson",
+                role: "Retirement Home Buyer",
+                category: "buyers",
+                content: "Planning for retirement, we wanted to downsize to a maintenance-free home. Luxnest-Realty understood our needs perfectly and found us a beautiful condo in a 55+ community with all the amenities we wanted. They made our transition smooth and stress-free.",
+                rating: 5,
+                propertyType: "Retirement Condo"
+            },
+            {
+                id: 11,
+                name: "Jennifer Lee",
+                role: "Investment Property Seller",
+                category: "sellers",
+                content: "When it was time to sell my rental property, I needed agents who understood investment real estate. Luxnest-Realty marketed to the right buyers and achieved a sale price that maximized my return on investment. Their market analysis was spot-on.",
+                rating: 5,
+                propertyType: "Investment Property"
+            },
+            {
+                id: 12,
+                name: "Christopher Davis",
+                role: "Luxury Renter",
+                category: "renters",
+                content: "Relocating for work, I needed a high-end rental quickly. Luxnest-Realty's luxury rental division found me an exceptional penthouse with concierge services and stunning city views. Their white-glove service made my corporate relocation seamless.",
+                rating: 5,
+                propertyType: "Luxury Penthouse"
+            }
+        ];
 
-</body>
+        let currentFilter = 'all';
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-toggle i');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+            }
+        }
+
+        // Generate stars for rating
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 0; i < 5; i++) {
+                stars += `<i class="fas fa-star star"></i>`;
+            }
+            return stars;
+        }
+
+        // Get initials from name
+        function getInitials(name) {
+            return name.split(' ').map(word => word[0]).join('');
+        }
+
+        // Create testimonial card
+        function createTestimonialCard(testimonial) {
+            return `
+                <div class="testimonial-card fade-in" data-category="${testimonial.category}">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-rating">
+                        ${generateStars(testimonial.rating)}
+                    </div>
+                    <div class="testimonial-content">
+                        "${testimonial.content}"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            ${getInitials(testimonial.name)}
+                        </div>
+                        <div class="author-info">
+                            <h4>${testimonial.name}</h4>
+                            <p>${testimonial.role}</p>
+                            <span class="property-type">${testimonial.propertyType}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Display testimonials
+        function displayTestimonials(filter = 'all') {
+            const grid = document.getElementById('testimonials-grid');
+            let filteredTestimonials = testimonials;
+
+            if (filter !== 'all') {
+                filteredTestimonials = testimonials.filter(t => t.category === filter);
+            }
+
+            grid.innerHTML = filteredTestimonials.map(createTestimonialCard).join('');
+
+            // Add stagger animation
+            const cards = grid.querySelectorAll('.testimonial-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+
+        // Filter testimonials
+        function filterTestimonials(category) {
+            currentFilter = category;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Display filtered testimonials
+            displayTestimonials(category);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayTestimonials();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97497d64f3d05bc4',t:'MTc1NjEwODEzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

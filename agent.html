@@ -1,140 +1,1432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Agents - LuxNest Realty</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Agents - Luxnest-Realty</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e40af;
+            --light-blue: #3b82f6;
+            --dark-blue: #1e3a8a;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #1f2937;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --error-red: #ef4444;
+        }
+
+        [data-theme="dark"] {
+            --white: #1f2937;
+            --light-gray: #111827;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            border-radius: 12px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .filter-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border: 2px solid transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        /* Agents Grid */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .agent-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .agent-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 2rem auto 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .agent-info {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .agent-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .agent-title {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .agent-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .specialty-tag {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .agent-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.2rem;
+        }
+
+        .agent-contact {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .contact-phone {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .contact-email {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .contact-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .agent-bio {
+            text-align: left;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .agent-languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .language-tag {
+            background: var(--accent-purple);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        .view-profile-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--light-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-profile-btn:hover {
+            background: var(--dark-blue);
+        }
+
+        /* Team Stats */
+        .team-stats {
+            background: var(--light-gray);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .stats-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* User Controls */
+        #userControls {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--light-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--light-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* User Controls */
+        #userControls {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-options {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .agent-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                Luxnest-Realty
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="property.html">Properties</a></li>
+                <li><a href="agent.html">Agents</a></li>
+                <li><a href="financial.html">Financing</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div id="userControls">
+                    <a href="settings.html" class="btn btn-secondary" style="margin-right: 0.5rem;">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <button class="btn btn-primary" onclick="logout()">Logout</button>
+                </div>
+                <div id="guestControls">
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Navbar -->
-   <header class="navbar">
-   <div class="container navbar-container">
-      <nav class="navbar">
-  <div class="navbar-logo">
-    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
-    <span>LuxNest Realty</span>
-  </div>
-  <ul class="navbar-links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="property-listings.html">Listings</a>
-    <a href="agent.html" aria-current="page">Agents</a>
-    <a href="financial.html">Finance</a>
-    <a href="FAQ.html">FAQ</a>
-    <a href="testimonials.html">testimonials</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html" class="btn-login">Login</a>
-  </ul>
-  <div class="navbar-icons">
-    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  </div>
-</nav>
-    </div>
-  </header>
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Meet Our Expert Agents</h1>
+                <p class="page-subtitle">Our experienced team of real estate professionals is dedicated to helping you find your perfect property or achieve the best sale price for your home.</p>
+            </div>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <h1>Meet Our Expert Agents</h1>
-    <p>Trusted professionals helping you find your perfect home.</p>
-  </section>
+            <!-- Filters -->
+            <div class="filters">
+                <h3 class="filter-title">Find the Right Agent for You</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active" onclick="filterAgents('all')">All Agents</button>
+                    <button class="filter-btn" onclick="filterAgents('residential')">Residential</button>
+                    <button class="filter-btn" onclick="filterAgents('commercial')">Commercial</button>
+                    <button class="filter-btn" onclick="filterAgents('luxury')">Luxury</button>
+                    <button class="filter-btn" onclick="filterAgents('investment')">Investment</button>
+                    <input type="text" class="search-box" placeholder="Search agents by name or specialty..." onkeyup="searchAgents(this.value)">
+                </div>
+            </div>
 
-  <!-- Agent Profiles -->
-  <section class="agents-section">
-    <div class="agent-card">
-      <img src="assets/a395af91-debf-4f71-9719-08e3e12fee4c.jpeg" alt="Agent Stacey" />
-      <div class="agent-info">
-        <h2>James Mutua</h2>
-        <p class="title">Senior Property Consultant</p>
-        <p>With over 10 years of experience, Stacey specializes in luxury residential properties and ensures clients get the best deals in Nairobi.</p>
-        <ul class="services">
-          <li>Luxury Home Sales</li>
-          <li>Property Valuation</li>
-          <li>Buyer Consultation</li>
-        </ul>
-        <p><strong>Contact:</strong> +254 712 345 678 | james@luxnestrealty.com</p>
-        <div class="testimonials">
-          <blockquote>"Stacey found our dream home in just 2 weeks! Professional and efficient."</blockquote>
-          <cite>- Maria W.</cite>
+            <!-- Team Stats -->
+            <div class="team-stats">
+                <h2 class="stats-title">Our Team's Achievements</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--success-green);">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="stat-value">2,500+</div>
+                        <div class="stat-description">Properties Sold</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--primary-blue);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">1,800+</div>
+                        <div class="stat-description">Happy Clients</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--warning-orange);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value">KES 15B+</div>
+                        <div class="stat-description">Total Sales Volume</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--accent-purple);">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-value">25+</div>
+                        <div class="stat-description">Industry Awards</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agents Grid -->
+            <div class="agents-grid" id="agentsGrid">
+                <!-- Agent 1 -->
+                <div class="agent-card" data-specialties="residential,luxury,investment">
+                    <div class="agent-photo">SM</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Stanley Mutune</h3>
+                        <p class="agent-title">Senior Real Estate Consultant</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Residential</span>
+                            <span class="specialty-tag">Luxury Homes</span>
+                            <span class="specialty-tag">Investment</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">450+</div>
+                                <div class="stat-label">Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">20</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">8.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Specializing in luxury residential properties in Nairobi's premium neighborhoods. Sarah has helped over 450 families find their dream homes with her personalized approach and market expertise.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Kamba</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254727463867" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:stanleymutune23@gmail.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254727463867" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('stanley-mutune')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 2 -->
+                <div class="agent-card" data-specialties="commercial,investment">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">JK</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">James Kiprotich</h3>
+                        <p class="agent-title">Commercial Property Specialist</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Commercial</span>
+                            <span class="specialty-tag">Investment</span>
+                            <span class="specialty-tag">Industrial</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">280+</div>
+                                <div class="stat-label">Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.8</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Expert in commercial real estate with extensive experience in office buildings, retail spaces, and industrial properties. James has facilitated over KES 3B in commercial transactions.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Kalenjin</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123002" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:james.kiprotich@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123002" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('james-kiprotich')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 3 -->
+                <div class="agent-card" data-specialties="residential,first-time">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">AN</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Amina Njeri</h3>
+                        <p class="agent-title">Residential Sales Expert</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Residential</span>
+                            <span class="specialty-tag">First-Time Buyers</span>
+                            <span class="specialty-tag">Affordable Housing</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">320+</div>
+                                <div class="stat-label">Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">6</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Passionate about helping first-time homebuyers navigate the property market. Amina specializes in affordable housing and has excellent knowledge of government housing schemes.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Arabic</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123003" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:amina.njeri@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123003" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('amina-njeri')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 4 -->
+                <div class="agent-card" data-specialties="luxury,investment,international">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">DO</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">David Ochieng</h3>
+                        <p class="agent-title">Luxury Property Consultant</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Luxury</span>
+                            <span class="specialty-tag">Investment</span>
+                            <span class="specialty-tag">International</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">180+</div>
+                                <div class="stat-label">Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">10</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.8</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Specializes in high-end luxury properties and international client relations. David has extensive experience with expatriate clients and premium property investments exceeding KES 50M.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Luo</span>
+                            <span class="language-tag">French</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123004" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:david.ochieng@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123004" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('david-ochieng')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 5 -->
+                <div class="agent-card" data-specialties="residential,rental,property-management">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">GW</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Grace Wanjiku</h3>
+                        <p class="agent-title">Property Management Specialist</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Residential</span>
+                            <span class="specialty-tag">Rental</span>
+                            <span class="specialty-tag">Property Management</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">520+</div>
+                                <div class="stat-label">Properties</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">7</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Expert in rental properties and property management services. Grace manages over 520 rental units and has helped hundreds of landlords maximize their rental income.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Kikuyu</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123005" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:grace.wanjiku@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123005" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('grace-wanjiku')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 6 -->
+                <div class="agent-card" data-specialties="commercial,retail,hospitality">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">MK</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Michael Kamau</h3>
+                        <p class="agent-title">Commercial & Retail Specialist</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Commercial</span>
+                            <span class="specialty-tag">Retail</span>
+                            <span class="specialty-tag">Hospitality</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">200+</div>
+                                <div class="stat-label">Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">9</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.7</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Specializes in commercial properties, retail spaces, and hospitality ventures. Michael has extensive experience with shopping centers, hotels, and restaurant locations.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Kikuyu</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123006" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:michael.kamau@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123006" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('michael-kamau')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 7 -->
+                <div class="agent-card" data-specialties="residential,coastal,vacation">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">FA</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Fatuma Ali</h3>
+                        <p class="agent-title">Coastal Properties Expert</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Residential</span>
+                            <span class="specialty-tag">Coastal</span>
+                            <span class="specialty-tag">Vacation Homes</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">150+</div>
+                                <div class="stat-label">Sales</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.8</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Based in Mombasa, Fatuma specializes in coastal properties including beachfront homes, vacation rentals, and investment properties along Kenya's beautiful coastline.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Arabic</span>
+                            <span class="language-tag">Italian</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123007" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:fatuma.ali@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123007" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('fatuma-ali')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 8 -->
+                <div class="agent-card" data-specialties="investment,development,land">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">PO</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Peter Otieno</h3>
+                        <p class="agent-title">Investment & Development Advisor</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Investment</span>
+                            <span class="specialty-tag">Development</span>
+                            <span class="specialty-tag">Land</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">95+</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">11</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Expert in land acquisition, property development, and investment strategies. Peter has facilitated over 95 development projects and specializes in identifying high-potential investment opportunities.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Luo</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123008" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:peter.otieno@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123008" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('peter-otieno')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 9 -->
+                <div class="agent-card" data-specialties="residential,relocation,corporate">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">LM</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Lucy Muthoni</h3>
+                        <p class="agent-title">Relocation & Corporate Services</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Residential</span>
+                            <span class="specialty-tag">Relocation</span>
+                            <span class="specialty-tag">Corporate</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">380+</div>
+                                <div class="stat-label">Relocations</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">6</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.8</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Specializes in corporate relocations and helping expatriate families find suitable housing. Lucy works with major corporations and international organizations for employee housing needs.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Kikuyu</span>
+                            <span class="language-tag">German</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123009" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:lucy.muthoni@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123009" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('lucy-muthoni')">View Full Profile</button>
+                    </div>
+                </div>
+
+                <!-- Agent 10 -->
+                <div class="agent-card" data-specialties="residential,mortgage,financial">
+                    <div class="agent-photo" style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">RK</div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Robert Kipchoge</h3>
+                        <p class="agent-title">Mortgage & Financial Advisor</p>
+                        
+                        <div class="agent-specialties">
+                            <span class="specialty-tag">Residential</span>
+                            <span class="specialty-tag">Mortgage</span>
+                            <span class="specialty-tag">Financial Planning</span>
+                        </div>
+
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <div class="stat-number">600+</div>
+                                <div class="stat-label">Loans</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">8</div>
+                                <div class="stat-label">Years Exp.</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="agent-bio">
+                            Combines real estate expertise with financial advisory services. Robert helps clients secure the best mortgage deals and provides comprehensive financial planning for property investments.
+                        </div>
+
+                        <div class="agent-languages">
+                            <span class="language-tag">English</span>
+                            <span class="language-tag">Swahili</span>
+                            <span class="language-tag">Kalenjin</span>
+                        </div>
+
+                        <div class="agent-contact">
+                            <a href="tel:+254700123010" class="contact-btn contact-phone">
+                                <i class="fas fa-phone"></i> Call
+                            </a>
+                            <a href="mailto:robert.kipchoge@luxnest-realty.com" class="contact-btn contact-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://wa.me/254700123010" class="contact-btn contact-whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+
+                        <button class="view-profile-btn" onclick="viewProfile('robert-kipchoge')">View Full Profile</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </main>
 
-    <div class="agent-card">
-      <img src="assets/A woman in a black hijab with a laptop on her hand _ Premium AI-generated image.jpeg" alt="Agent Linda" />
-      <div class="agent-info">
-        <h2>Linda Wanjiru</h2>
-        <p class="title">Commercial Real Estate Specialist</p>
-        <p>Linda brings a strategic approach to commercial investments and leasing. Her clients trust her data-driven insights and negotiation skills.</p>
-        <ul class="services">
-          <li>Commercial Leasing</li>
-          <li>Retail Space Acquisition</li>
-          <li>Investment Advice</li>
-        </ul>
-        <p><strong>Contact:</strong> +254 711 223 344 | linda@luxnestrealty.com</p>
-        <div class="testimonials">
-          <blockquote>"Linda helped me secure my office space with great ROI. Highly recommend her."</blockquote>
-          <cite>- Kelvin O.</cite>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxnest-Realty</h3>
+                    <p>Kenya's premier real estate agency specializing in luxury properties and international investments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="property.html">Properties</a>
+                    <a href="agent.html">Our Agents</a>
+                    <a href="financial.html">Financing</a>
+                    <a href="contact.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Property Valuation</a>
+                    <a href="#">Property Management</a>
+                    <a href="#">Legal Services</a>
+                    <a href="#">Investment Consulting</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi, Kenya</p>
+                    <p><i class="fas fa-phone"></i> +254 700 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@luxnest-realty.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Luxnest-Realty. All rights reserved. | Licensed Real Estate Agency</p>
+            </div>
         </div>
-      </div>
-    </div>
+    </footer>
 
-    <div class="agent-card">
-      <img src="assets/Afripadd.jpeg" alt="Agent David" />
-      <div class="agent-info">
-        <h2>David Kiprop</h2>
-        <p class="title">Land Development Consultant</p>
-        <p>David helps clients acquire prime plots for personal and commercial development. He has vast knowledge of zoning and regulation.</p>
-        <ul class="services">
-          <li>Land Acquisition</li>
-          <li>Development Planning</li>
-          <li>Zoning Compliance</li>
-        </ul>
-        <p><strong>Contact:</strong> +254 701 567 890 | david@luxnestrealty.com</p>
-        <div class="testimonials">
-          <blockquote>"David walked me through the process of buying land stress-free. Outstanding agent!"</blockquote>
-          <cite>- Beatrice K.</cite>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script>
+        let currentTheme = 'light';
+        let isLoggedIn = false;
+        let currentUser = null;
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-about">
-        <h3>About LuxNest</h3>
-        <p>We help you find your dream property with expert service and trust.</p>
-      </div>
-      <div class="footer-links">
-        <h3>Quick Links</h3>
-        <a href="index.html">Home</a>
-        <a href="properties.html">Properties</a>
-        <a href="agents.html">Agents</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-contact">
-        <h3>Contact Info</h3>
-        <p>123 Real Estate St, Nairobi, Kenya</p>
-        <p>Email: info@luxnestrealty.com</p>
-        <p>Phone: +254 700 000 000</p>
-      </div>
-      <div class="footer-social">
-        <h3>Follow Us</h3>
-        <div class="social-media">
-          <img src="assets/Free Facebook.jpeg" alt="facebook">
-          <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
-          <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
-          <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 LuxNest Realty. All rights reserved.
-    </div>
-  </footer>
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            
+            localStorage.setItem('luxnest_theme', currentTheme);
+        }
 
-  <script src="script.js"></script>
-</body>
+        function toggleMobileMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        function updateUserInterface() {
+            const userControls = document.getElementById('userControls');
+            const guestControls = document.getElementById('guestControls');
+            
+            if (isLoggedIn) {
+                userControls.style.display = 'flex';
+                guestControls.style.display = 'none';
+            } else {
+                userControls.style.display = 'none';
+                guestControls.style.display = 'block';
+            }
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            updateUserInterface();
+            localStorage.removeItem('luxnest_user');
+        }
+
+        function filterAgents(specialty) {
+            const cards = document.querySelectorAll('.agent-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (specialty === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const specialties = card.getAttribute('data-specialties');
+                    if (specialties.includes(specialty)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function searchAgents(query) {
+            const cards = document.querySelectorAll('.agent-card');
+            const searchTerm = query.toLowerCase();
+            
+            cards.forEach(card => {
+                const name = card.querySelector('.agent-name').textContent.toLowerCase();
+                const specialties = card.getAttribute('data-specialties').toLowerCase();
+                const title = card.querySelector('.agent-title').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || specialties.includes(searchTerm) || title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function viewProfile(agentId) {
+            // Store selected agent for profile page
+            localStorage.setItem('selectedAgent', agentId);
+            
+            // Show profile modal or navigate to profile page
+            alert(`Opening profile for ${agentId.replace('-', ' ')}. This would typically navigate to a detailed profile page.`);
+            
+            // In a real application, you would navigate to:
+            // window.location.href = `agent-profile.html?id=${agentId}`;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for stored user data
+            const storedUser = localStorage.getItem('luxnest_user');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                isLoggedIn = true;
+                updateUserInterface();
+            }
+            
+            // Check for stored theme
+            const storedTheme = localStorage.getItem('luxnest_theme');
+            if (storedTheme) {
+                currentTheme = storedTheme;
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                const themeIcon = document.querySelector('.theme-toggle i');
+                themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const nav = document.querySelector('.nav-links');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
+                nav.classList.remove('active');
+            }
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe agent cards for animation
+        document.querySelectorAll('.agent-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e6a4a043b85bc5',t:'MTc1NTA3MTY1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

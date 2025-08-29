@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - PropertyHub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-color: #4ade80;
+            --error-color: #f87171;
+            --warning-color: #fbbf24;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-white: #ffffff;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.08)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="90" cy="40" r="0.8" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .register-container {
+            background: var(--bg-white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-heavy);
+            overflow: hidden;
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .register-visual {
+            background: var(--secondary-gradient);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            color: white;
+            text-align: center;
+        }
+
+        .register-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/><stop offset="100%" style="stop-color:rgba(255,255,255,0.05)"/></linearGradient></defs><polygon points="0,0 200,0 150,200 0,200" fill="url(%23grad1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .visual-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .visual-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .visual-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .visual-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            max-width: 300px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .feature-item i {
+            margin-right: 1rem;
+            font-size: 1.3rem;
+            color: #fbbf24;
+            min-width: 24px;
+        }
+
+        .register-form-section {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 700px;
+            overflow-y: auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-weight: 500;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-success {
+            background: rgba(74, 222, 128, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .alert-error {
+            background: rgba(248, 113, 113, 0.1);
+            color: var(--error-color);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--bg-white);
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .input-icon:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .password-strength {
+            margin-top: 0.7rem;
+        }
+
+        .strength-bar {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .strength-progress {
+            height: 100%;
+            transition: all 0.4s ease;
+            border-radius: 3px;
+        }
+
+        .strength-weak { background: var(--error-color); width: 25%; }
+        .strength-fair { background: var(--warning-color); width: 50%; }
+        .strength-good { background: #667eea; width: 75%; }
+        .strength-strong { background: var(--success-color); width: 100%; }
+
+        .strength-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.2rem;
+            transform: scale(1.2);
+            accent-color: #667eea;
+        }
+
+        .checkbox-group a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .checkbox-group a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            background: var(--bg-white);
+            padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-social {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--bg-white);
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-google:hover {
+            border-color: #db4437;
+            background: rgba(219, 68, 55, 0.05);
+            color: #db4437;
+        }
+
+        .btn-facebook:hover {
+            border-color: #4267B2;
+            background: rgba(66, 103, 178, 0.05);
+            color: #4267B2;
+        }
+
+        .auth-link {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .auth-link a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .register-container {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: 10px;
+            }
+
+            .register-visual {
+                display: none;
+            }
+
+            .register-form-section {
+                padding: 2rem;
+                max-height: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-form-section {
+                padding: 1.5rem;
+            }
+
+            .form-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-visual">
+            <div class="visual-content">
+                <div class="visual-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h1 class="visual-title">Join PropertyHub</h1>
+                <p class="visual-subtitle">Discover your perfect property with our advanced platform</p>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <i class="fas fa-search-location"></i>
+                        Smart Property Search
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-user-tie"></i>
+                        Expert Agent Network
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-chart-bar"></i>
+                        Market Analytics
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-shield-check"></i>
+                        Verified Listings
+                    </li>
+                    <li class="feature-item">
+                        <i class="fas fa-bell"></i>
+                        Instant Notifications
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="register-form-section">
+            <div class="form-header">
+                <h2 class="form-title">Create Account</h2>
+                <p class="form-subtitle">Start your property journey today</p>
+            </div>
+
+            <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+
+            <form id="registerForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name *</label>
+                        <input type="text" id="firstName" class="form-input" required placeholder="Enter first name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" class="form-input" required placeholder="Enter last name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address *</label>
+                    <input type="email" id="email" class="form-input" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" class="form-input" required placeholder="Enter phone number">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password *</label>
+                    <div class="input-group">
+                        <input type="password" id="password" class="form-input" required placeholder="Create password">
+                        <i class="fas fa-eye input-icon" onclick="togglePasswordVisibility('password')"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-progress" id="strengthProgress"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText">Password strength will appear here</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm Password *</label>
+                    <div class="input-group">
+                        <input type="password" id="confirmPassword" class="form-input" required placeholder="Confirm password">
+                        <i class="fas fa-eye input-icon" onclick="togglePasswordVisibility('confirmPassword')"></i>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="dateOfBirth">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="gender">Gender</label>
+                        <select id="gender" class="form-select">
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not-to-say">Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">
+                        I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and 
+                        <a href="#" onclick="showPrivacy()">Privacy Policy</a> *
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter">
+                    <label for="newsletter">
+                        Subscribe to our newsletter for property updates and market insights
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i>
+                    Create Account
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>or sign up with</span>
+            </div>
+
+            <div class="social-buttons">
+                <button class="btn-social btn-google" onclick="socialSignup('google')">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button class="btn-social btn-facebook" onclick="socialSignup('facebook')">
+                    <i class="fab fa-facebook-f"></i>
+                    Facebook
+                </button>
+            </div>
+
+            <div class="auth-link">
+                Already have an account? <a href="login.html">Login In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAlert(type, message) {
+            const alertElement = document.getElementById(type === 'success' ? 'successAlert' : 'errorAlert');
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash input-icon';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye input-icon';
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            const requirements = [];
+
+            if (password.length >= 8) strength++;
+            else requirements.push('8+ characters');
+
+            if (/[a-z]/.test(password)) strength++;
+            else requirements.push('lowercase');
+
+            if (/[A-Z]/.test(password)) strength++;
+            else requirements.push('uppercase');
+
+            if (/[0-9]/.test(password)) strength++;
+            else requirements.push('number');
+
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            else requirements.push('special character');
+
+            const progressBar = document.getElementById('strengthProgress');
+            const strengthText = document.getElementById('strengthText');
+
+            progressBar.className = 'strength-progress';
+            
+            if (strength === 0) {
+                strengthText.textContent = 'Password strength will appear here';
+                strengthText.style.color = 'var(--text-secondary)';
+            } else if (strength <= 2) {
+                progressBar.classList.add('strength-weak');
+                strengthText.textContent = `Weak - Add ${requirements.slice(0, 2).join(', ')}`;
+                strengthText.style.color = 'var(--error-color)';
+            } else if (strength === 3) {
+                progressBar.classList.add('strength-fair');
+                strengthText.textContent = `Fair - Add ${requirements[0]}`;
+                strengthText.style.color = 'var(--warning-color)';
+            } else if (strength === 4) {
+                progressBar.classList.add('strength-good');
+                strengthText.textContent = `Good - Add ${requirements[0]}`;
+                strengthText.style.color = '#667eea';
+            } else {
+                progressBar.classList.add('strength-strong');
+                strengthText.textContent = 'Strong password!';
+                strengthText.style.color = 'var(--success-color)';
+            }
+
+            return strength;
+        }
+
+        function validateEmail(email) {
+            const users = JSON.parse(localStorage.getItem('propertyhub_users') || '[]');
+            return !users.some(user => user.email === email);
+        }
+
+        function socialSignup(provider) {
+            showAlert('error', `${provider.charAt(0).toUpperCase() + provider.slice(1)} signup is  available in this demo. Please use the form above.`);
+        }
+
+        function showTerms() {
+            alert('Terms of Service:\n\n• You must be 18+ to use PropertyHub\n• Provide accurate information\n• Respect other users and agents\n• No fraudulent listings or activities\n• We reserve the right to suspend accounts\n• Property information provided as-is\n• Agents are independent contractors\n\nThis is a real version.');
+        }
+
+        function showPrivacy() {
+            alert('Privacy Policy:\n\n• We collect information you provide\n• Data used to match you with properties\n• Information shared with agents for inquiries\n• Cookies used for better experience\n• You can request data deletion\n• Security measures protect your data\n• We don\'t sell personal information\n\nThis is a real version.');
+        }
+
+        // Password strength checking
+        document.getElementById('password').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                password: document.getElementById('password').value,
+                confirmPassword: document.getElementById('confirmPassword').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                gender: document.getElementById('gender').value,
+                agreeTerms: document.getElementById('agreeTerms').checked,
+                newsletter: document.getElementById('newsletter').checked
+            };
+
+            // Validation
+            if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.password) {
+                showAlert('error', 'Please fill in all required fields.');
+                return;
+            }
+
+            if (!formData.agreeTerms) {
+                showAlert('error', 'You must agree to the Terms of Service and Privacy Policy.');
+                return;
+            }
+
+            if (formData.password !== formData.confirmPassword) {
+                showAlert('error', 'Passwords do not match.');
+                return;
+            }
+
+            if (checkPasswordStrength(formData.password) < 3) {
+                showAlert('error', 'Password is too weak. Please create a stronger password.');
+                return;
+            }
+
+            if (!validateEmail(formData.email)) {
+                showAlert('successfully', 'An account with this email already exists.');
+                return;
+            }
+
+            // Show loading
+            const registerBtn = document.getElementById('registerBtn');
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<div class="loading-spinner"></div> Creating Account...';
+
+            // Simulate registration
+            setTimeout(() => {
+                const users = JSON.parse(localStorage.getItem('propertyhub_users') || '[]');
+                
+                const newUser = {
+                    id: Date.now(),
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    fullName: `${formData.firstName} ${formData.lastName}`,
+                    email: formData.email,
+                    phone: formData.phone,
+                    password: formData.password,
+                    dateOfBirth: formData.dateOfBirth,
+                    gender: formData.gender,
+                    newsletter: formData.newsletter,
+                    registeredAt: new Date().toISOString(),
+                    isVerified: true
+                };
+
+                users.push(newUser);
+                localStorage.setItem('propertyhub_users', JSON.stringify(users));
+                
+                // Set registration success flags
+                localStorage.setItem('propertyhub_registration_success', 'true');
+                localStorage.setItem('propertyhub_new_user_email', formData.email);
+                localStorage.setItem('propertyhub_new_user_name', formData.firstName);
+
+                showAlert('success', `Welcome ${formData.firstName}! Account created successfully. Redirecting to login page...`);
+
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+
+            }, 2000);
+        });
+
+        // Initialize real users
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if already logged in
+            if (localStorage.getItem('propertyhub_logged_in') === 'true') {
+                const user = JSON.parse(localStorage.getItem('propertyhub_current_user') || '{}');
+                showAlert('success', `Welcome back ${user.firstName}! You're already logged in. Redirecting to LOGIN PAGE...`);
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                return;
+            }
+
+            // Create real users if none exist
+            if (!localStorage.getItem('propertyhub_users')) {
+                const demoUsers = [
+                    {
+                        id: 1,
+                        firstName: 'Stanley',
+                        lastName: 'Mutune',
+                        fullName: 'Stanley Mutune',
+                        email: 'stanleymutune23@gmail.com',
+                        password: 'bas123456hir',
+                        phone: '0727463867',
+                        registeredAt: new Date().toISOString(),
+                        isVerified: true
+                    },
+                    {
+                        id: 2,
+                        firstName: 'Stanley',
+                        lastName: 'Mutune',
+                        fullName: 'Stanley Mutune',
+                        email: 'stanleymutune23@gmail.com',
+                        password: 'bas123456hir',
+                        phone: '0727463867',
+                        registeredAt: new Date().toISOString(),
+                        isVerified: true
+                    }
+                ];
+                localStorage.setItem('propertyhub_users', JSON.stringify(RealUsers));
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e7354634ae5bc4',t:'MTc1NTA3NzU3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

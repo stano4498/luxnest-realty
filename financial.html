@@ -1,145 +1,1274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Financial | LuxNest Realty</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financing - Luxnest-Realty</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e40af;
+            --light-blue: #3b82f6;
+            --dark-blue: #1e3a8a;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #1f2937;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+        }
+
+        [data-theme="dark"] {
+            --white: #1f2937;
+            --light-gray: #111827;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Financial Tools Grid */
+        .financial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .financial-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .financial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .result-section {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .result-highlight {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+        }
+
+        /* Financing Options */
+        .financing-options {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .option-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .option-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .option-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .option-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .option-features li i {
+            color: var(--success-green);
+            margin-right: 0.5rem;
+        }
+
+        /* Investment Calculator */
+        .investment-section {
+            background: var(--light-gray);
+            padding: 3rem 0;
+            margin: 3rem 0;
+        }
+
+        .investment-calculator {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .calculator-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Chart Placeholder */
+        .chart-container {
+            height: 300px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            height: 200px;
+            gap: 10px;
+        }
+
+        .chart-bar {
+            width: 30px;
+            background: var(--primary-blue);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .chart-bar:nth-child(2) { background: var(--light-blue); }
+        .chart-bar:nth-child(3) { background: var(--success-green); }
+        .chart-bar:nth-child(4) { background: var(--warning-orange); }
+        .chart-bar:nth-child(5) { background: var(--accent-purple); }
+
+        /* User Controls */
+        #userControls {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--light-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--light-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* User Controls */
+        #userControls {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .financial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-tabs {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                border-bottom: 1px solid #e5e7eb;
+                border-right: none;
+            }
+
+            .tab-button.active {
+                border-bottom-color: var(--primary-blue);
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                Luxnest-Realty
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="property.html">Properties</a></li>
+                <li><a href="agent.html">Agents</a></li>
+                <li><a href="financial.html" class="active">Financing</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div id="userControls">
+                    <a href="settings.html" class="btn btn-secondary" style="margin-right: 0.5rem;">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <button class="btn btn-primary" onclick="logout()">Logout</button>
+                </div>
+                <div id="guestControls">
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-  <header class="navbar">
-   <div class="container navbar-container">
-      <nav class="navbar">
-  <div class="navbar-logo">
-    <img src="assets/LuxNest Realty - Upscale Simplicity.png" alt="LuxNest Realty" />
-    <span>LuxNest Realty</span>
-  </div>
-  <ul class="navbar-links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="property-listings.html">Listings</a>
-    <a href="agent.html">Agents</a>
-    <a href="financial.html" aria-current="page">Finance</a>
-    <a href="FAQ.html">FAQ</a>
-    <a href="testimonials.html">testimonials</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html" class="btn-login">Login</a>
-  </ul>
-  <div class="navbar-icons">
-    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  </div>
-</nav>
-    </div>
-  </header>
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Real Estate Financing</h1>
+                <p class="page-subtitle">Comprehensive financial tools and solutions for your property investment journey</p>
+            </div>
 
+            <!-- Financial Calculators -->
+            <div class="financial-grid">
+                <!-- Mortgage Calculator -->
+                <div class="financial-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: var(--primary-blue);">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3 class="card-title">Mortgage Calculator</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Property Price (KES)</label>
+                        <input type="number" id="propertyPrice" placeholder="25,000,000" oninput="calculateMortgage()">
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label>Down Payment (%)</label>
+                            <input type="number" id="downPayment" placeholder="20" oninput="calculateMortgage()">
+                        </div>
+                        <div class="form-group">
+                            <label>Interest Rate (%)</label>
+                            <input type="number" id="interestRate" placeholder="12.5" step="0.1" oninput="calculateMortgage()">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Loan Term (Years)</label>
+                        <select id="loanTerm" onchange="calculateMortgage()">
+                            <option value="15">15 years</option>
+                            <option value="20" selected>20 years</option>
+                            <option value="25">25 years</option>
+                            <option value="30">30 years</option>
+                        </select>
+                    </div>
+                    
+                    <div class="result-section" id="mortgageResults">
+                        <div class="result-item">
+                            <span class="result-label">Loan Amount:</span>
+                            <span class="result-value" id="loanAmount">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Monthly Payment:</span>
+                            <span class="result-value result-highlight" id="monthlyPayment">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Interest:</span>
+                            <span class="result-value" id="totalInterest">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Payment:</span>
+                            <span class="result-value" id="totalPayment">KES 0</span>
+                        </div>
+                    </div>
+                </div>
 
-  <main class="financial-page">
-    <section class="hero-financial">
-      <h1>Financial Tools & Guidance</h1>
-      <p>Understand your home financing options and calculate your affordability.</p>
-    </section>
+                <!-- Affordability Calculator -->
+                <div class="financial-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: var(--success-green);">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3 class="card-title">Affordability Calculator</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Monthly Income (KES)</label>
+                        <input type="number" id="monthlyIncome" placeholder="150,000" oninput="calculateAffordability()">
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label>Monthly Expenses (KES)</label>
+                            <input type="number" id="monthlyExpenses" placeholder="50,000" oninput="calculateAffordability()">
+                        </div>
+                        <div class="form-group">
+                            <label>Existing Debts (KES)</label>
+                            <input type="number" id="existingDebts" placeholder="20,000" oninput="calculateAffordability()">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Available Down Payment (KES)</label>
+                        <input type="number" id="availableDownPayment" placeholder="5,000,000" oninput="calculateAffordability()">
+                    </div>
+                    
+                    <div class="result-section" id="affordabilityResults">
+                        <div class="result-item">
+                            <span class="result-label">Available for Housing:</span>
+                            <span class="result-value" id="availableForHousing">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Max Property Price:</span>
+                            <span class="result-value result-highlight" id="maxPropertyPrice">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Recommended Budget:</span>
+                            <span class="result-value" id="recommendedBudget">KES 0</span>
+                        </div>
+                    </div>
+                </div>
 
-    <section class="loan-info">
-      <h2>Popular Loan Programs</h2>
-      <div class="loan-grid">
-        <div class="loan-card">
-          <h3>Fixed-Rate Mortgage</h3>
-          <p>Stable monthly payments over a set term. Ideal for long-term planning.</p>
+                <!-- Investment ROI Calculator -->
+                <div class="financial-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: var(--warning-orange);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="card-title">Investment ROI Calculator</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Purchase Price (KES)</label>
+                        <input type="number" id="purchasePrice" placeholder="20,000,000" oninput="calculateROI()">
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label>Monthly Rent (KES)</label>
+                            <input type="number" id="monthlyRent" placeholder="80,000" oninput="calculateROI()">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Expenses (KES)</label>
+                            <input type="number" id="annualExpenses" placeholder="200,000" oninput="calculateROI()">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Expected Appreciation (%/year)</label>
+                        <input type="number" id="appreciation" placeholder="8" step="0.1" oninput="calculateROI()">
+                    </div>
+                    
+                    <div class="result-section" id="roiResults">
+                        <div class="result-item">
+                            <span class="result-label">Annual Rental Income:</span>
+                            <span class="result-value" id="annualRental">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Net Annual Income:</span>
+                            <span class="result-value" id="netAnnualIncome">KES 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Rental Yield:</span>
+                            <span class="result-value result-highlight" id="rentalYield">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total ROI (with appreciation):</span>
+                            <span class="result-value result-highlight" id="totalROI">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financing Options -->
+            <section class="financing-options">
+                <h2 class="section-title">Financing Options</h2>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <div class="option-icon" style="background: var(--primary-blue);">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3 class="option-title">Bank Mortgages</h3>
+                        <p class="option-description">Traditional mortgage loans from leading Kenyan banks with competitive rates and flexible terms.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Interest rates from 12.5%</li>
+                            <li><i class="fas fa-check"></i> Up to 25-year terms</li>
+                            <li><i class="fas fa-check"></i> Down payment from 20%</li>
+                            <li><i class="fas fa-check"></i> Local and foreign income accepted</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactFinancing('Bank Mortgages')">Learn More</button>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="option-icon" style="background: var(--success-green);">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="option-title">Developer Financing</h3>
+                        <p class="option-description">Flexible payment plans directly from property developers with attractive terms.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Flexible payment schedules</li>
+                            <li><i class="fas fa-check"></i> Lower down payments</li>
+                            <li><i class="fas fa-check"></i> Construction-linked payments</li>
+                            <li><i class="fas fa-check"></i> No bank approval required</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactFinancing('Developer Financing')">Learn More</button>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="option-icon" style="background: var(--warning-orange);">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="option-title">International Financing</h3>
+                        <p class="option-description">Specialized financing solutions for international investors and diaspora clients.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Foreign currency loans</li>
+                            <li><i class="fas fa-check"></i> Diaspora-friendly terms</li>
+                            <li><i class="fas fa-check"></i> International income verification</li>
+                            <li><i class="fas fa-check"></i> Cryptocurrency payment options</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactFinancing('International Financing')">Learn More</button>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="option-icon" style="background: var(--accent-purple);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="option-title">Joint Investment</h3>
+                        <p class="option-description">Pool resources with other investors for larger property investments and shared ownership.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Shared ownership structure</li>
+                            <li><i class="fas fa-check"></i> Lower individual investment</li>
+                            <li><i class="fas fa-check"></i> Professional management</li>
+                            <li><i class="fas fa-check"></i> Diversified portfolio access</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactFinancing('Joint Investment')">Learn More</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investment Analysis -->
+            <section class="investment-section">
+                <div class="container">
+                    <div class="investment-calculator">
+                        <h2 class="section-title">Investment Analysis</h2>
+                        
+                        <div class="calculator-tabs">
+                            <button class="tab-button active" onclick="switchTab('comparison')">Property Comparison</button>
+                            <button class="tab-button" onclick="switchTab('projection')">Growth Projection</button>
+                            <button class="tab-button" onclick="switchTab('cashflow')">Cash Flow Analysis</button>
+                        </div>
+
+                        <div id="comparison" class="tab-content active">
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label>Property A Price (KES)</label>
+                                    <input type="number" id="propertyA" placeholder="15,000,000" oninput="updateComparison()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Property B Price (KES)</label>
+                                    <input type="number" id="propertyB" placeholder="20,000,000" oninput="updateComparison()">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label>Property A Rent (KES)</label>
+                                    <input type="number" id="rentA" placeholder="60,000" oninput="updateComparison()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Property B Rent (KES)</label>
+                                    <input type="number" id="rentB" placeholder="85,000" oninput="updateComparison()">
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" id="barA" style="height: 120px;"></div>
+                                    <div class="chart-bar" id="barB" style="height: 80px;"></div>
+                                </div>
+                            </div>
+                            <div class="result-section">
+                                <div class="result-item">
+                                    <span class="result-label">Property A Yield:</span>
+                                    <span class="result-value" id="yieldA">4.8%</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Property B Yield:</span>
+                                    <span class="result-value" id="yieldB">5.1%</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Better Investment:</span>
+                                    <span class="result-value result-highlight" id="betterInvestment">Property B</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="projection" class="tab-content">
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label>Initial Investment (KES)</label>
+                                    <input type="number" id="initialInvestment" placeholder="5,000,000" oninput="updateProjection()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Annual Growth Rate (%)</label>
+                                    <input type="number" id="growthRate" placeholder="8" step="0.1" oninput="updateProjection()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Investment Period (Years)</label>
+                                <select id="investmentPeriod" onchange="updateProjection()">
+                                    <option value="5">5 years</option>
+                                    <option value="10" selected>10 years</option>
+                                    <option value="15">15 years</option>
+                                    <option value="20">20 years</option>
+                                </select>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height: 60px;"></div>
+                                    <div class="chart-bar" style="height: 90px;"></div>
+                                    <div class="chart-bar" style="height: 130px;"></div>
+                                    <div class="chart-bar" style="height: 170px;"></div>
+                                    <div class="chart-bar" style="height: 200px;"></div>
+                                </div>
+                            </div>
+                            <div class="result-section">
+                                <div class="result-item">
+                                    <span class="result-label">Future Value:</span>
+                                    <span class="result-value result-highlight" id="futureValue">KES 10,794,624</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Total Gain:</span>
+                                    <span class="result-value" id="totalGain">KES 5,794,624</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">ROI:</span>
+                                    <span class="result-value" id="projectionROI">115.9%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="cashflow" class="tab-content">
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label>Property Value (KES)</label>
+                                    <input type="number" id="cashflowProperty" placeholder="25,000,000" oninput="updateCashflow()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Monthly Rent (KES)</label>
+                                    <input type="number" id="cashflowRent" placeholder="100,000" oninput="updateCashflow()">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label>Monthly Mortgage (KES)</label>
+                                    <input type="number" id="mortgagePayment" placeholder="180,000" oninput="updateCashflow()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Monthly Expenses (KES)</label>
+                                    <input type="number" id="propertyExpenses" placeholder="25,000" oninput="updateCashflow()">
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-area" style="font-size: 3rem; color: var(--primary-blue);"></i>
+                                    <p>Monthly Cash Flow Analysis</p>
+                                </div>
+                            </div>
+                            <div class="result-section">
+                                <div class="result-item">
+                                    <span class="result-label">Monthly Income:</span>
+                                    <span class="result-value" id="monthlyIncome">KES 100,000</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Monthly Expenses:</span>
+                                    <span class="result-value" id="monthlyExpensesTotal">KES 205,000</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Net Cash Flow:</span>
+                                    <span class="result-value result-highlight" id="netCashflow">-KES 105,000</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Break-even Rent:</span>
+                                    <span class="result-value" id="breakEvenRent">KES 205,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="loan-card">
-          <h3>Adjustable-Rate Mortgage (ARM)</h3>
-          <p>Lower initial rates that adjust over time. Good for short-term buyers.</p>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxnest-Realty</h3>
+                    <p>Kenya's premier real estate agency specializing in luxury properties and international investments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="property.html">Properties</a>
+                    <a href="agent.html">Our Agents</a>
+                    <a href="financial.html">Financing</a>
+                    <a href="contact.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Property Valuation</a>
+                    <a href="#">Property Management</a>
+                    <a href="#">Legal Services</a>
+                    <a href="#">Investment Consulting</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi, Kenya</p>
+                    <p><i class="fas fa-phone"></i> +254 700 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@luxnest-realty.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Luxnest-Realty. All rights reserved. | Licensed Real Estate Agency</p>
+            </div>
         </div>
-        <div class="loan-card">
-          <h3>FHA Loan</h3>
-          <p>Backed by the government. Great for first-time home buyers with low down payments.</p>
-        </div>
-        <div class="loan-card">
-          <h3>Jumbo Loan</h3>
-          <p>Financing for properties exceeding standard loan limits.</p>
-        </div>
-      </div>
-    </section>
+    </footer>
 
-    <section class="calculator-section">
-      <h2>Mortgage Calculator</h2>
-      <div class="calculator">
-        <label>Home Price: <input type="number" id="price" placeholder="e.g., 1000000" /></label>
-        <label>Down Payment (%): <input type="number" id="down" placeholder="e.g., 20" /></label>
-        <label>Loan Term (years): <input type="number" id="term" placeholder="e.g., 30" /></label>
-        <label>Interest Rate (%): <input type="number" id="rate" placeholder="e.g., 6.5" /></label>
-        <button onclick="calculateMortgage()">Calculate</button>
-        <p class="result" id="result"></p>
-      </div>
-    </section>
+    <script>
+        let currentTheme = 'light';
+        let isLoggedIn = false;
+        let currentUser = null;
 
-    <section class="financial-contact">
-      <h2>Need Expert Help?</h2>
-      <p>We connect you with experienced mortgage advisors and real estate financial experts.</p>
-      <a href="contact.html" class="btn">Talk to a Specialist</a>
-    </section>
-  </main>
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            
+            localStorage.setItem('luxnest_theme', currentTheme);
+        }
 
-   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-about">
-        <h3>About LuxNest</h3>
-        <p>We help you find your dream property with expert service and trust.</p>
-      </div>
-      <div class="footer-links">
-        <h3>Quick Links</h3>
-        <a href="index.html">Home</a>
-        <a href="properties.html">Properties</a>
-        <a href="agents.html">Agents</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-contact">
-        <h3>Contact Info</h3>
-        <p>123 Real Estate St, Nairobi, Kenya</p>
-        <p>Email: info@luxnestrealty.com</p>
-        <p>Phone: +254 700 000 000</p>
-      </div>
-      <div class="footer-social">
-        <h3>Follow Us</h3>
-        <div class="social-media">
-        <img src="assets/Free Facebook.jpeg" alt="facebook">
-        <img src="assets/Modern badge logo instagram icon _ Premium Vector.jpeg" alt="instagram">
-        <img src="assets/Real TikTok Logo.jpeg" alt="TikTok">
-        <img src="assets/YouTube Logo PNG - Free Download.jpeg" alt="YouTube">
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 LuxNest Realty. All rights reserved.
-    </div>
-  </footer>
+        function toggleMobileMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
 
+        function updateUserInterface() {
+            const userControls = document.getElementById('userControls');
+            const guestControls = document.getElementById('guestControls');
+            
+            if (isLoggedIn) {
+                userControls.style.display = 'flex';
+                guestControls.style.display = 'none';
+            } else {
+                userControls.style.display = 'none';
+                guestControls.style.display = 'block';
+            }
+        }
 
-  <script>
-    function calculateMortgage() {
-      const price = parseFloat(document.getElementById("price").value);
-      const down = parseFloat(document.getElementById("down").value);
-      const term = parseInt(document.getElementById("term").value);
-      const rate = parseFloat(document.getElementById("rate").value);
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            updateUserInterface();
+            localStorage.removeItem('luxnest_user');
+        }
 
-      if (isNaN(price) || isNaN(down) || isNaN(term) || isNaN(rate)) {
-        document.getElementById("result").innerText = "Please enter all fields correctly.";
-        return;
-      }
+        // Mortgage Calculator
+        function calculateMortgage() {
+            const propertyPrice = parseFloat(document.getElementById('propertyPrice').value) || 0;
+            const downPaymentPercent = parseFloat(document.getElementById('downPayment').value) || 20;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 12.5;
+            const loanTermYears = parseInt(document.getElementById('loanTerm').value) || 20;
 
-      const principal = price - (price * down / 100);
-      const monthlyRate = rate / 100 / 12;
-      const totalPayments = term * 12;
+            const downPaymentAmount = (propertyPrice * downPaymentPercent) / 100;
+            const loanAmount = propertyPrice - downPaymentAmount;
+            const monthlyRate = (interestRate / 100) / 12;
+            const numberOfPayments = loanTermYears * 12;
 
-      const monthly =
-        (principal * monthlyRate) /
-        (1 - Math.pow(1 + monthlyRate, -totalPayments));
+            let monthlyPayment = 0;
+            if (loanAmount > 0 && monthlyRate > 0) {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+                                (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+            }
 
-      document.getElementById("result").innerText =
-        "Estimated Monthly Payment: $" + monthly.toFixed(2);
-    }
-  </script>
-</body>
+            const totalPayment = monthlyPayment * numberOfPayments;
+            const totalInterest = totalPayment - loanAmount;
+
+            document.getElementById('loanAmount').textContent = `KES ${loanAmount.toLocaleString()}`;
+            document.getElementById('monthlyPayment').textContent = `KES ${monthlyPayment.toLocaleString()}`;
+            document.getElementById('totalInterest').textContent = `KES ${totalInterest.toLocaleString()}`;
+            document.getElementById('totalPayment').textContent = `KES ${totalPayment.toLocaleString()}`;
+        }
+
+        // Affordability Calculator
+        function calculateAffordability() {
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value) || 0;
+            const existingDebts = parseFloat(document.getElementById('existingDebts').value) || 0;
+            const availableDownPayment = parseFloat(document.getElementById('availableDownPayment').value) || 0;
+
+            const availableForHousing = monthlyIncome - monthlyExpenses - existingDebts;
+            const maxMonthlyPayment = availableForHousing * 0.8; // 80% of available income
+            
+            // Assuming 12.5% interest rate and 20 years
+            const monthlyRate = 0.125 / 12;
+            const numberOfPayments = 20 * 12;
+            
+            let maxLoanAmount = 0;
+            if (maxMonthlyPayment > 0 && monthlyRate > 0) {
+                maxLoanAmount = maxMonthlyPayment * (Math.pow(1 + monthlyRate, numberOfPayments) - 1) / 
+                               (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments));
+            }
+
+            const maxPropertyPrice = maxLoanAmount + availableDownPayment;
+            const recommendedBudget = maxPropertyPrice * 0.8; // Conservative recommendation
+
+            document.getElementById('availableForHousing').textContent = `KES ${availableForHousing.toLocaleString()}`;
+            document.getElementById('maxPropertyPrice').textContent = `KES ${maxPropertyPrice.toLocaleString()}`;
+            document.getElementById('recommendedBudget').textContent = `KES ${recommendedBudget.toLocaleString()}`;
+        }
+
+        // ROI Calculator
+        function calculateROI() {
+            const purchasePrice = parseFloat(document.getElementById('purchasePrice').value) || 0;
+            const monthlyRent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+            const annualExpenses = parseFloat(document.getElementById('annualExpenses').value) || 0;
+            const appreciation = parseFloat(document.getElementById('appreciation').value) || 0;
+
+            const annualRental = monthlyRent * 12;
+            const netAnnualIncome = annualRental - annualExpenses;
+            const rentalYield = purchasePrice > 0 ? (netAnnualIncome / purchasePrice) * 100 : 0;
+            const totalROI = rentalYield + appreciation;
+
+            document.getElementById('annualRental').textContent = `KES ${annualRental.toLocaleString()}`;
+            document.getElementById('netAnnualIncome').textContent = `KES ${netAnnualIncome.toLocaleString()}`;
+            document.getElementById('rentalYield').textContent = `${rentalYield.toFixed(1)}%`;
+            document.getElementById('totalROI').textContent = `${totalROI.toFixed(1)}%`;
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Comparison Calculator
+        function updateComparison() {
+            const propertyA = parseFloat(document.getElementById('propertyA').value) || 15000000;
+            const propertyB = parseFloat(document.getElementById('propertyB').value) || 20000000;
+            const rentA = parseFloat(document.getElementById('rentA').value) || 60000;
+            const rentB = parseFloat(document.getElementById('rentB').value) || 85000;
+
+            const yieldA = ((rentA * 12) / propertyA) * 100;
+            const yieldB = ((rentB * 12) / propertyB) * 100;
+
+            document.getElementById('yieldA').textContent = `${yieldA.toFixed(1)}%`;
+            document.getElementById('yieldB').textContent = `${yieldB.toFixed(1)}%`;
+            document.getElementById('betterInvestment').textContent = yieldA > yieldB ? 'Property A' : 'Property B';
+
+            // Update chart bars
+            const maxYield = Math.max(yieldA, yieldB);
+            document.getElementById('barA').style.height = `${(yieldA / maxYield) * 150}px`;
+            document.getElementById('barB').style.height = `${(yieldB / maxYield) * 150}px`;
+        }
+
+        // Projection Calculator
+        function updateProjection() {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 5000000;
+            const growthRate = parseFloat(document.getElementById('growthRate').value) || 8;
+            const period = parseInt(document.getElementById('investmentPeriod').value) || 10;
+
+            const futureValue = initialInvestment * Math.pow(1 + (growthRate / 100), period);
+            const totalGain = futureValue - initialInvestment;
+            const roi = ((totalGain / initialInvestment) * 100);
+
+            document.getElementById('futureValue').textContent = `KES ${futureValue.toLocaleString()}`;
+            document.getElementById('totalGain').textContent = `KES ${totalGain.toLocaleString()}`;
+            document.getElementById('projectionROI').textContent = `${roi.toFixed(1)}%`;
+        }
+
+        // Cashflow Calculator
+        function updateCashflow() {
+            const propertyValue = parseFloat(document.getElementById('cashflowProperty').value) || 25000000;
+            const monthlyRent = parseFloat(document.getElementById('cashflowRent').value) || 100000;
+            const mortgagePayment = parseFloat(document.getElementById('mortgagePayment').value) || 180000;
+            const propertyExpenses = parseFloat(document.getElementById('propertyExpenses').value) || 25000;
+
+            const monthlyExpensesTotal = mortgagePayment + propertyExpenses;
+            const netCashflow = monthlyRent - monthlyExpensesTotal;
+            const breakEvenRent = monthlyExpensesTotal;
+
+            document.getElementById('monthlyIncome').textContent = `KES ${monthlyRent.toLocaleString()}`;
+            document.getElementById('monthlyExpensesTotal').textContent = `KES ${monthlyExpensesTotal.toLocaleString()}`;
+            document.getElementById('netCashflow').textContent = `${netCashflow >= 0 ? '' : '-'}KES ${Math.abs(netCashflow).toLocaleString()}`;
+            document.getElementById('breakEvenRent').textContent = `KES ${breakEvenRent.toLocaleString()}`;
+        }
+
+        function contactFinancing(type) {
+            window.location.href = `contact.html?service=${encodeURIComponent(type)}`;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for stored user data
+            const storedUser = localStorage.getItem('luxnest_user');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                isLoggedIn = true;
+                updateUserInterface();
+            }
+            
+            // Check for stored theme
+            const storedTheme = localStorage.getItem('luxnest_theme');
+            if (storedTheme) {
+                currentTheme = storedTheme;
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                const themeIcon = document.querySelector('.theme-toggle i');
+                themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+
+            // Initialize calculators with default values
+            calculateMortgage();
+            calculateAffordability();
+            calculateROI();
+            updateComparison();
+            updateProjection();
+            updateCashflow();
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const nav = document.querySelector('.nav-links');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e68f81e4d95bc1',t:'MTc1NTA3MDc4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

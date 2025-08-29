@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - Luxnest-Realty</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e40af;
+            --light-blue: #3b82f6;
+            --dark-blue: #1e3a8a;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #1f2937;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --success-green: #10b981;
+            --error-red: #ef4444;
+            --warning-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --border-color: #e5e7eb;
+        }
+
+        [data-theme="dark"] {
+            --white: #1f2937;
+            --light-gray: #111827;
+            --text-dark: #f9fafb;
+            --text-light: #d1d5db;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--primary-blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-blue);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--error-red);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 3rem 0;
+        }
+
+        .settings-header {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .settings-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue), var(--accent-purple));
+        }
+
+        .settings-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .settings-subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .settings-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        .settings-sidebar {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            padding: 2rem;
+            height: fit-content;
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(30, 64, 175, 0.08);
+            color: var(--primary-blue);
+            transform: translateX(4px);
+        }
+
+        .sidebar-menu a.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .sidebar-menu i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .settings-main {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .settings-section {
+            display: none;
+            padding: 3rem;
+        }
+
+        .settings-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-title i {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .profile-section {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(59, 130, 246, 0.05));
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(30, 64, 175, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-photo:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upload-btn {
+            background: var(--light-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .upload-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .language-option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(30, 64, 175, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .language-option.selected {
+            border-color: var(--primary-blue);
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.1));
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.2);
+        }
+
+        .language-option input {
+            margin-right: 1rem;
+            transform: scale(1.2);
+        }
+
+        .language-flag {
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+        }
+
+        .language-info {
+            flex: 1;
+        }
+
+        .language-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .language-native {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-blue);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .password-strength {
+            margin-top: 0.75rem;
+        }
+
+        .strength-bar {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .strength-weak { background: var(--error-red); width: 25%; }
+        .strength-fair { background: var(--warning-orange); width: 50%; }
+        .strength-good { background: var(--light-blue); width: 75%; }
+        .strength-strong { background: var(--success-green); width: 100%; }
+
+        .strength-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .success-message, .error-message, .info-message {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-red);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .info-message {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--light-blue);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .settings-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--light-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--light-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* User Controls */
+        #userControls {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .danger-zone {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .danger-title {
+            color: var(--error-red);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .danger-description {
+            color: #7f1d1d;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 1024px) {
+            .settings-content {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .settings-main {
+                order: 1;
+            }
+
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+                gap: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .sidebar-menu li {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .settings-header {
+                padding: 2rem;
+            }
+
+            .settings-title {
+                font-size: 2rem;
+            }
+
+            .settings-section {
+                padding: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="home.html" class="logo">
+                <i class="fas fa-home"></i>
+                Luxnest-Realty
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="property.html">Properties</a></li>
+                <li><a href="agent.html">Agents</a></li>
+                <li><a href="financial.html">Financing</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="settings-header">
+                <h1 class="settings-title">Account Settings</h1>
+                <p class="settings-subtitle">Manage your account preferences, security, and personal information</p>
+            </div>
+
+            <div class="settings-content">
+                <div class="settings-sidebar">
+                    <h3 class="sidebar-title">
+                        <i class="fas fa-cog"></i>
+                        Settings Menu
+                    </h3>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="#" class="menu-item active" data-section="profile">
+                                <i class="fas fa-user-circle"></i>
+                                Profile & Personal Info
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-item" data-section="language">
+                                <i class="fas fa-globe-americas"></i>
+                                Language & Region
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-item" data-section="security">
+                                <i class="fas fa-shield-alt"></i>
+                                Security & Password
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-item" data-section="notifications">
+                                <i class="fas fa-bell"></i>
+                                Notifications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-item" data-section="privacy">
+                                <i class="fas fa-user-shield"></i>
+                                Privacy & Data
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-item" data-section="preferences">
+                                <i class="fas fa-sliders-h"></i>
+                                Preferences
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-item" data-section="account">
+                                <i class="fas fa-user-cog"></i>
+                                Account Management
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="settings-main">
+                    <!-- Profile Section -->
+                    <div class="settings-section active" id="profile">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-circle"></i>
+                            Profile & Personal Information
+                        </h2>
+
+                        <div class="success-message" id="profileSuccess"></div>
+                        <div class="error-message" id="profileError"></div>
+
+                        <div class="profile-section">
+                            <div class="profile-header">
+                                <div class="profile-photo" id="profilePhoto">
+                                    JD
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-camera" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-controls">
+                                    <button class="upload-btn" onclick="document.getElementById('photoInput').click()">
+                                        <i class="fas fa-upload"></i> Upload New Photo
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="removePhoto()">
+                                        <i class="fas fa-trash"></i> Remove Photo
+                                    </button>
+                                    <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(this)">
+                                    <p class="form-description">JPG, PNG or GIF. Max size 5MB. Recommended: 400x400px</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="profileForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="profileFirstName">
+                                        <i class="fas fa-user"></i> First Name *
+                                    </label>
+                                    <input type="text" id="profileFirstName" class="form-input" required placeholder="Enter your first name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="profileLastName">
+                                        <i class="fas fa-user"></i> Last Name *
+                                    </label>
+                                    <input type="text" id="profileLastName" class="form-input" required placeholder="Enter your last name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="profileEmail">
+                                        <i class="fas fa-envelope"></i> Email Address *
+                                    </label>
+                                    <input type="email" id="profileEmail" class="form-input" required placeholder="your.email@example.com">
+                                    <p class="form-description">This email will be used for account notifications and login</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="profilePhone">
+                                        <i class="fas fa-phone"></i> Phone Number *
+                                    </label>
+                                    <input type="tel" id="profilePhone" class="form-input" required placeholder="+254 700 000 000">
+                                    <p class="form-description">Used for property inquiries and important notifications</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="profileDateOfBirth">
+                                        <i class="fas fa-calendar"></i> Date of Birth
+                                    </label>
+                                    <input type="date" id="profileDateOfBirth" class="form-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="profileGender">
+                                        <i class="fas fa-venus-mars"></i> Gender
+                                    </label>
+                                    <select id="profileGender" class="form-select">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                        <option value="prefer-not-to-say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="profileAddress">
+                                    <i class="fas fa-map-marker-alt"></i> Address
+                                </label>
+                                <textarea id="profileAddress" class="form-textarea" placeholder="Enter your full address"></textarea>
+                                <p class="form-description">Your current residential address</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="profileBio">
+                                    <i class="fas fa-info-circle"></i> Bio / About Me
+                                </label>
+                                <textarea id="profileBio" class="form-textarea" placeholder="Tell us about yourself, your property preferences, or anything you'd like agents to know..."></textarea>
+                                <p class="form-description">This information helps agents understand your needs better (Optional)</p>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Profile Changes
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetProfileForm()">
+                                    <i class="fas fa-undo"></i> Reset Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Language Section -->
+                    <div class="settings-section" id="language">
+                        <h2 class="section-title">
+                            <i class="fas fa-globe-americas"></i>
+                            Language & Regional Settings
+                        </h2>
+
+                        <div class="success-message" id="languageSuccess"></div>
+                        <div class="info-message" id="languageInfo"></div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-language"></i>
+                                Select Your Preferred Language
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Choose the language for the interface and communications. This will affect all menus, buttons, and email notifications.</p>
+                            
+                            <div class="language-grid">
+                                <label class="language-option selected" data-lang="en">
+                                    <input type="radio" name="language" value="en" checked>
+                                    <span class="language-flag">🇺🇸</span>
+                                    <div class="language-info">
+                                        <div class="language-name">English</div>
+                                        <div class="language-native">English (US)</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="sw">
+                                    <input type="radio" name="language" value="sw">
+                                    <span class="language-flag">🇰🇪</span>
+                                    <div class="language-info">
+                                        <div class="language-name">Kiswahili</div>
+                                        <div class="language-native">Kiswahili (Kenya)</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="fr">
+                                    <input type="radio" name="language" value="fr">
+                                    <span class="language-flag">🇫🇷</span>
+                                    <div class="language-info">
+                                        <div class="language-name">French</div>
+                                        <div class="language-native">Français</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="ar">
+                                    <input type="radio" name="language" value="ar">
+                                    <span class="language-flag">🇸🇦</span>
+                                    <div class="language-info">
+                                        <div class="language-name">Arabic</div>
+                                        <div class="language-native">العربية</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="de">
+                                    <input type="radio" name="language" value="de">
+                                    <span class="language-flag">🇩🇪</span>
+                                    <div class="language-info">
+                                        <div class="language-name">German</div>
+                                        <div class="language-native">Deutsch</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="es">
+                                    <input type="radio" name="language" value="es">
+                                    <span class="language-flag">🇪🇸</span>
+                                    <div class="language-info">
+                                        <div class="language-name">Spanish</div>
+                                        <div class="language-native">Español</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="pt">
+                                    <input type="radio" name="language" value="pt">
+                                    <span class="language-flag">🇵🇹</span>
+                                    <div class="language-info">
+                                        <div class="language-name">Portuguese</div>
+                                        <div class="language-native">Português</div>
+                                    </div>
+                                </label>
+                                
+                                <label class="language-option" data-lang="zh">
+                                    <input type="radio" name="language" value="zh">
+                                    <span class="language-flag">🇨🇳</span>
+                                    <div class="language-info">
+                                        <div class="language-name">Chinese</div>
+                                        <div class="language-native">中文</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-clock"></i>
+                                Regional Settings
+                            </h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="timezone">
+                                        <i class="fas fa-globe"></i> Timezone
+                                    </label>
+                                    <select id="timezone" class="form-select">
+                                        <option value="Africa/Nairobi" selected>East Africa Time (EAT) - UTC+3</option>
+                                        <option value="UTC">Coordinated Universal Time (UTC)</option>
+                                        <option value="America/New_York">Eastern Time (ET) - UTC-5</option>
+                                        <option value="America/Los_Angeles">Pacific Time (PT) - UTC-8</option>
+                                        <option value="Europe/London">Greenwich Mean Time (GMT) - UTC+0</option>
+                                        <option value="Europe/Paris">Central European Time (CET) - UTC+1</option>
+                                        <option value="Asia/Dubai">Gulf Standard Time (GST) - UTC+4</option>
+                                        <option value="Asia/Shanghai">China Standard Time (CST) - UTC+8</option>
+                                        <option value="Asia/Tokyo">Japan Standard Time (JST) - UTC+9</option>
+                                    </select>
+                                    <p class="form-description">Used for scheduling appointments and displaying property listing times</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="currency">
+                                        <i class="fas fa-dollar-sign"></i> Preferred Currency
+                                    </label>
+                                    <select id="currency" class="form-select">
+                                        <option value="KES" selected>Kenyan Shilling (KES)</option>
+                                        <option value="USD">US Dollar (USD)</option>
+                                        <option value="EUR">Euro (EUR)</option>
+                                        <option value="GBP">British Pound (GBP)</option>
+                                        <option value="AED">UAE Dirham (AED)</option>
+                                        <option value="ZAR">South African Rand (ZAR)</option>
+                                    </select>
+                                    <p class="form-description">Property prices will be displayed in this currency when possible</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="dateFormat">
+                                        <i class="fas fa-calendar-alt"></i> Date Format
+                                    </label>
+                                    <select id="dateFormat" class="form-select">
+                                        <option value="DD/MM/YYYY" selected>DD/MM/YYYY (31/12/2024)</option>
+                                        <option value="MM/DD/YYYY">MM/DD/YYYY (12/31/2024)</option>
+                                        <option value="YYYY-MM-DD">YYYY-MM-DD (2024-12-31)</option>
+                                        <option value="DD-MM-YYYY">DD-MM-YYYY (31-12-2024)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="numberFormat">
+                                        <i class="fas fa-hashtag"></i> Number Format
+                                    </label>
+                                    <select id="numberFormat" class="form-select">
+                                        <option value="1,234.56" selected>1,234.56 (Comma thousands, dot decimal)</option>
+                                        <option value="1.234,56">1.234,56 (Dot thousands, comma decimal)</option>
+                                        <option value="1 234.56">1 234.56 (Space thousands, dot decimal)</option>
+                                        <option value="1234.56">1234.56 (No separator)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="saveLanguageSettings()">
+                                <i class="fas fa-save"></i> Save Language Settings
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetLanguageSettings()">
+                                <i class="fas fa-undo"></i> Reset to Default
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="settings-section" id="security">
+                        <h2 class="section-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Security & Password Management
+                        </h2>
+
+                        <div class="success-message" id="securitySuccess"></div>
+                        <div class="error-message" id="securityError"></div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-key"></i>
+                                Change Password
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Update your password to keep your account secure. Use a strong password with at least 8 characters.</p>
+
+                            <form id="passwordForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="currentPassword">
+                                        <i class="fas fa-lock"></i> Current Password *
+                                    </label>
+                                    <div class="password-container">
+                                        <input type="password" id="currentPassword" class="form-input" required placeholder="Enter your current password">
+                                        <button type="button" class="password-toggle" onclick="togglePassword('currentPassword')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="newPassword">
+                                        <i class="fas fa-key"></i> New Password *
+                                    </label>
+                                    <div class="password-container">
+                                        <input type="password" id="newPassword" class="form-input" required placeholder="Enter your new password">
+                                        <button type="button" class="password-toggle" onclick="togglePassword('newPassword')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="password-strength" id="passwordStrength">
+                                        <div class="strength-bar">
+                                            <div class="strength-fill" id="strengthFill"></div>
+                                        </div>
+                                        <div class="strength-text" id="strengthText">Password strength will appear here</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="confirmNewPassword">
+                                        <i class="fas fa-check-circle"></i> Confirm New Password *
+                                    </label>
+                                    <div class="password-container">
+                                        <input type="password" id="confirmNewPassword" class="form-input" required placeholder="Confirm your new password">
+                                        <button type="button" class="password-toggle" onclick="togglePassword('confirmNewPassword')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="action-buttons">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Change Password
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" onclick="generateStrongPassword()">
+                                        <i class="fas fa-random"></i> Generate Strong Password
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-mobile-alt"></i>
+                                Two-Factor Authentication (2FA)
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Add an extra layer of security to your account with two-factor authentication.</p>
+                            
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <span>2FA Status:</span>
+                                <span id="twoFAStatus" style="color: var(--error-red); font-weight: 600;">
+                                    <i class="fas fa-times-circle"></i> Disabled
+                                </span>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button class="btn btn-success" onclick="setup2FA()">
+                                    <i class="fas fa-shield-alt"></i> Enable 2FA
+                                </button>
+                                <button class="btn btn-secondary" onclick="show2FAInfo()">
+                                    <i class="fas fa-info-circle"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-history"></i>
+                                Login Activity
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Monitor recent login activity on your account.</p>
+                            
+                            <div id="loginActivity">
+                                <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; margin-bottom: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <strong>Current Session</strong>
+                                            <div style="font-size: 0.9rem; color: var(--text-light);">
+                                                <i class="fas fa-desktop"></i> Desktop • Chrome • Nairobi, Kenya
+                                            </div>
+                                        </div>
+                                        <div style="color: var(--success-green); font-weight: 600;">
+                                            <i class="fas fa-circle" style="font-size: 0.5rem;"></i> Active Now
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-secondary" onclick="viewFullLoginHistory()">
+                                <i class="fas fa-list"></i> View Full Login History
+                            </button>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Session Management
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Manage your active sessions across different devices.</p>
+                            
+                            <div class="action-buttons">
+                                <button class="btn btn-danger" onclick="logoutAllDevices()">
+                                    <i class="fas fa-sign-out-alt"></i> Logout All Devices
+                                </button>
+                                <button class="btn btn-secondary" onclick="viewActiveSessions()">
+                                    <i class="fas fa-devices"></i> View Active Sessions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Section -->
+                    <div class="settings-section" id="notifications">
+                        <h2 class="section-title">
+                            <i class="fas fa-bell"></i>
+                            Notification Preferences
+                        </h2>
+
+                        <div class="success-message" id="notificationSuccess"></div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-envelope"></i>
+                                Email Notifications
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Account Security Alerts</strong>
+                                        <p class="form-description">Login attempts, password changes, and security updates</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="securityEmails" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Property Alerts</strong>
+                                        <p class="form-description">New properties matching your search criteria</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="propertyEmails" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Agent Communications</strong>
+                                        <p class="form-description">Messages and updates from real estate agents</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="agentEmails" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Marketing & Promotions</strong>
+                                        <p class="form-description">Newsletter, special offers, and promotional content</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="marketingEmails">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>System Updates</strong>
+                                        <p class="form-description">Platform updates, maintenance notifications, and new features</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="systemEmails" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-sms"></i>
+                                SMS Notifications
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Critical Security Alerts</strong>
+                                        <p class="form-description">Urgent security notifications and login alerts</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="securitySMS" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Appointment Reminders</strong>
+                                        <p class="form-description">Property viewing appointments and meetings</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="appointmentSMS">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Urgent Property Updates</strong>
+                                        <p class="form-description">Price changes and availability updates for saved properties</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="urgentPropertySMS">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-desktop"></i>
+                                In-App Notifications
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Browser Notifications</strong>
+                                        <p class="form-description">Show desktop notifications when browsing</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="browserNotifications">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Sound Notifications</strong>
+                                        <p class="form-description">Play sound for new messages and alerts</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="soundNotifications">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="saveNotificationSettings()">
+                                <i class="fas fa-save"></i> Save Notification Settings
+                            </button>
+                            <button class="btn btn-secondary" onclick="testNotifications()">
+                                <i class="fas fa-bell"></i> Send Test Notification
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Section -->
+                    <div class="settings-section" id="privacy">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-shield"></i>
+                            Privacy & Data Management
+                        </h2>
+
+                        <div class="success-message" id="privacySuccess"></div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-eye"></i>
+                                Profile Visibility
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Public Profile</strong>
+                                        <p class="form-description">Allow agents and other users to see your profile</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="publicProfile" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Contact Information Visibility</strong>
+                                        <p class="form-description">Show your phone and email to verified agents</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="contactVisibility" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Search History Visibility</strong>
+                                        <p class="form-description">Allow agents to see your property search patterns</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="searchVisibility">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-database"></i>
+                                Data Collection & Usage
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Analytics & Performance</strong>
+                                        <p class="form-description">Help improve our service by sharing anonymous usage data</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="analyticsData" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Personalized Recommendations</strong>
+                                        <p class="form-description">Use your activity to suggest relevant properties</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="personalizedRecs" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Location Tracking</strong>
+                                        <p class="form-description">Use your location to show nearby properties</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="locationTracking">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-download"></i>
+                                Data Export & Deletion
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Manage your personal data according to privacy regulations.</p>
+                            
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" onclick="exportPersonalData()">
+                                    <i class="fas fa-download"></i> Download My Data
+                                </button>
+                                <button class="btn btn-secondary" onclick="viewDataUsage()">
+                                    <i class="fas fa-chart-bar"></i> View Data Usage
+                                </button>
+                                <button class="btn btn-danger" onclick="requestDataDeletion()">
+                                    <i class="fas fa-trash"></i> Request Data Deletion
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="savePrivacySettings()">
+                                <i class="fas fa-save"></i> Save Privacy Settings
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Section -->
+                    <div class="settings-section" id="preferences">
+                        <h2 class="section-title">
+                            <i class="fas fa-sliders-h"></i>
+                            Application Preferences
+                        </h2>
+
+                        <div class="success-message" id="preferencesSuccess"></div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-home"></i>
+                                Property Search Preferences
+                            </h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="defaultPropertyType">
+                                        <i class="fas fa-building"></i> Default Property Type
+                                    </label>
+                                    <select id="defaultPropertyType" class="form-select">
+                                        <option value="">All Property Types</option>
+                                        <option value="apartment">Apartment</option>
+                                        <option value="house">House</option>
+                                        <option value="villa">Villa</option>
+                                        <option value="townhouse">Townhouse</option>
+                                        <option value="land">Land</option>
+                                        <option value="commercial">Commercial</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="defaultLocation">
+                                        <i class="fas fa-map-marker-alt"></i> Preferred Location
+                                    </label>
+                                    <input type="text" id="defaultLocation" class="form-input" placeholder="e.g., Nairobi, Westlands">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="budgetRange">
+                                        <i class="fas fa-dollar-sign"></i> Budget Range (KES)
+                                    </label>
+                                    <select id="budgetRange" class="form-select">
+                                        <option value="">Any Budget</option>
+                                        <option value="0-1000000">Under 1M</option>
+                                        <option value="1000000-5000000">1M - 5M</option>
+                                        <option value="5000000-10000000">5M - 10M</option>
+                                        <option value="10000000-20000000">10M - 20M</option>
+                                        <option value="20000000+">Above 20M</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="resultsPerPage">
+                                        <i class="fas fa-list"></i> Results Per Page
+                                    </label>
+                                    <select id="resultsPerPage" class="form-select">
+                                        <option value="12" selected>12 properties</option>
+                                        <option value="24">24 properties</option>
+                                        <option value="36">36 properties</option>
+                                        <option value="48">48 properties</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-palette"></i>
+                                Display Preferences
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Dark Mode</strong>
+                                        <p class="form-description">Use dark theme for better viewing in low light</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="darkModeToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Compact View</strong>
+                                        <p class="form-description">Show more properties in a smaller space</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="compactView">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div>
+                                        <strong>Auto-play Property Videos</strong>
+                                        <p class="form-description">Automatically play property tour videos</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="autoplayVideos">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="savePreferences()">
+                                <i class="fas fa-save"></i> Save Preferences
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetPreferences()">
+                                <i class="fas fa-undo"></i> Reset to Default
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Account Management Section -->
+                    <div class="settings-section" id="account">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-cog"></i>
+                            Account Management
+                        </h2>
+
+                        <div class="success-message" id="accountSuccess"></div>
+                        <div class="error-message" id="accountError"></div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-info-circle"></i>
+                                Account Information
+                            </h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Account Status</label>
+                                    <p style="color: var(--success-green); font-weight: 600; font-size: 1.1rem;">
+                                        <i class="fas fa-check-circle"></i> Active & Verified
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Member Since</label>
+                                    <p id="memberSince" style="font-weight: 500;">Loading...</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Account Type</label>
+                                    <p style="font-weight: 500;">Standard User</p>
+                                    <button class="btn btn-secondary" onclick="upgradeToPremium()" style="margin-top: 0.5rem;">
+                                        <i class="fas fa-star"></i> Upgrade to Premium
+                                    </button>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Email Verification</label>
+                                    <p style="color: var(--success-green); font-weight: 500;">
+                                        <i class="fas fa-check-circle"></i> Verified
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fas fa-star"></i>
+                                Premium Features
+                            </h3>
+                            <p class="form-description" style="margin-bottom: 1.5rem;">Upgrade to Premium for exclusive benefits and advanced features.</p>
+                            
+                            <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1)); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                                <h4 style="margin-bottom: 1rem; color: var(--accent-purple);">Premium Benefits Include:</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Priority customer support</li>
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Advanced property search filters</li>
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Exclusive property listings</li>
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Personal property consultant</li>
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Market insights and reports</li>
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-check" style="color: var(--success-green); margin-right: 0.5rem;"></i> Save unlimited properties</li>
+                                </ul>
+                            </div>
+
+                            <button class="btn btn-primary" onclick="upgradeToPremium()">
+                                <i class="fas fa-crown"></i> Upgrade Now - KES 2,999/month
+                            </button>
+                        </div>
+
+                        <div class="danger-zone">
+                            <h3 class="danger-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Danger Zone
+                            </h3>
+                            <p class="danger-description">
+                                The following actions are permanent and cannot be undone. Please proceed with caution.
+                            </p>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="margin-bottom: 0.5rem;">Deactivate Account</h4>
+                                <p class="form-description">Temporarily disable your account. You can reactivate it anytime by logging in.</p>
+                                <button class="btn btn-secondary" onclick="deactivateAccount()" style="margin-top: 0.5rem;">
+                                    <i class="fas fa-pause"></i> Deactivate Account
+                                </button>
+                            </div>
+
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem;">Delete Account</h4>
+                                <p class="danger-description">
+                                    Permanently delete your account and all associated data. This action cannot be reversed.
+                                </p>
+                                <button class="btn btn-danger" onclick="deleteAccount()">
+                                    <i class="fas fa-trash"></i> Delete Account Permanently
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxnest-Realty</h3>
+                    <p>Kenya's premier real estate agency specializing in luxury properties and international investments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="property.html">Properties</a>
+                    <a href="agent.html">Our Agents</a>
+                    <a href="financial.html">Financing</a>
+                    <a href="contact.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Property Valuation</a>
+                    <a href="#">Property Management</a>
+                    <a href="#">Legal Services</a>
+                    <a href="#">Investment Consulting</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi, Kenya</p>
+                    <p><i class="fas fa-phone"></i> +254 700 123 456</p>
+                    <p><i class="fas fa-envelope"></i> info@luxnest-realty.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Luxnest-Realty. All rights reserved. | Licensed Real Estate Agency</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentTheme = 'light';
+        let currentUser = {
+            id: 1,
+            firstName: 'John',
+            lastName: 'Doe',
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            phone: '+254 700 123 456',
+            password: 'password123',
+            registrationDate: '2024-01-15',
+            dateOfBirth: '1990-05-15',
+            gender: 'male',
+            address: 'Nairobi, Kenya',
+            bio: 'Looking for a modern apartment in Westlands area.'
+        };
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            
+            // Update dark mode toggle in preferences
+            document.getElementById('darkModeToggle').checked = currentTheme === 'dark';
+            
+            localStorage.setItem('luxnest_theme', currentTheme);
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        function showMessage(elementId, message, type = 'success') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.style.display = 'block';
+            
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        function switchSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.settings-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked menu item
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        }
+
+        function handlePhotoUpload(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                
+                if (file.size > 5 * 1024 * 1024) {
+                    showMessage('profileError', 'File size must be less than 5MB', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // In a real app, you would upload this to a server
+                    showMessage('profileSuccess', 'Profile photo updated successfully!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removePhoto() {
+            // Reset to initials
+            const initials = `${currentUser.firstName?.[0] || ''}${currentUser.lastName?.[0] || ''}` || 'U';
+            document.getElementById('profilePhoto').innerHTML = `${initials.toUpperCase()}<div class="photo-overlay"><i class="fas fa-camera" style="font-size: 1.5rem;"></i></div>`;
+            showMessage('profileSuccess', 'Profile photo removed successfully!');
+        }
+
+        function resetProfileForm() {
+            if (confirm('Are you sure you want to reset all changes? This will restore your original profile information.')) {
+                // Reload original data
+                populateProfileForm();
+                showMessage('profileSuccess', 'Profile form reset to original values');
+            }
+        }
+
+        function populateProfileForm() {
+            document.getElementById('profileFirstName').value = currentUser.firstName || '';
+            document.getElementById('profileLastName').value = currentUser.lastName || '';
+            document.getElementById('profileEmail').value = currentUser.email || '';
+            document.getElementById('profilePhone').value = currentUser.phone || '';
+            document.getElementById('profileDateOfBirth').value = currentUser.dateOfBirth || '';
+            document.getElementById('profileGender').value = currentUser.gender || '';
+            document.getElementById('profileAddress').value = currentUser.address || '';
+            document.getElementById('profileBio').value = currentUser.bio || '';
+        }
+
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            let feedback = [];
+
+            if (password.length >= 8) strength++;
+            else feedback.push('at least 8 characters');
+
+            if (/[a-z]/.test(password)) strength++;
+            else feedback.push('lowercase letter');
+
+            if (/[A-Z]/.test(password)) strength++;
+            else feedback.push('uppercase letter');
+
+            if (/[0-9]/.test(password)) strength++;
+            else feedback.push('number');
+
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            else feedback.push('special character');
+
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+
+            strengthFill.className = 'strength-fill';
+            
+            if (strength === 0) {
+                strengthText.textContent = 'Password strength will appear here';
+            } else if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+                strengthText.textContent = 'Weak - Add ' + feedback.slice(0, 2).join(', ');
+                strengthText.style.color = 'var(--error-red)';
+            } else if (strength === 3) {
+                strengthFill.classList.add('strength-fair');
+                strengthText.textContent = 'Fair - Add ' + feedback[0];
+                strengthText.style.color = 'var(--warning-orange)';
+            } else if (strength === 4) {
+                strengthFill.classList.add('strength-good');
+                strengthText.textContent = 'Good - Add ' + feedback[0];
+                strengthText.style.color = 'var(--light-blue)';
+            } else {
+                strengthFill.classList.add('strength-strong');
+                strengthText.textContent = 'Strong password!';
+                strengthText.style.color = 'var(--success-green)';
+            }
+
+            return strength;
+        }
+
+        function generateStrongPassword() {
+            const length = 16;
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+            let password = "";
+            
+            // Ensure at least one character from each required type
+            password += "abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 26)];
+            password += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random() * 26)];
+            password += "0123456789"[Math.floor(Math.random() * 10)];
+            password += "!@#$%^&*"[Math.floor(Math.random() * 8)];
+            
+            // Fill the rest randomly
+            for (let i = 4; i < length; i++) {
+                password += charset[Math.floor(Math.random() * charset.length)];
+            }
+            
+            // Shuffle the password
+            password = password.split('').sort(() => Math.random() - 0.5).join('');
+            
+            document.getElementById('newPassword').value = password;
+            document.getElementById('confirmNewPassword').value = password;
+            checkPasswordStrength(password);
+            
+            // Show password temporarily
+            document.getElementById('newPassword').type = 'text';
+            document.getElementById('confirmNewPassword').type = 'text';
+            
+            setTimeout(() => {
+                document.getElementById('newPassword').type = 'password';
+                document.getElementById('confirmNewPassword').type = 'password';
+            }, 3000);
+            
+            showMessage('securitySuccess', 'Strong password generated! It will be hidden in 3 seconds.');
+        }
+
+        function saveLanguageSettings() {
+            const selectedLang = document.querySelector('input[name="language"]:checked').value;
+            const timezone = document.getElementById('timezone').value;
+            const currency = document.getElementById('currency').value;
+            const dateFormat = document.getElementById('dateFormat').value;
+            const numberFormat = document.getElementById('numberFormat').value;
+            
+            const settings = {
+                language: selectedLang,
+                timezone: timezone,
+                currency: currency,
+                dateFormat: dateFormat,
+                numberFormat: numberFormat
+            };
+            
+            localStorage.setItem('luxnest_language_settings', JSON.stringify(settings));
+            showMessage('languageSuccess', 'Language and regional settings saved successfully!');
+        }
+
+        function resetLanguageSettings() {
+            if (confirm('Reset all language and regional settings to default?')) {
+                document.querySelector('input[value="en"]').checked = true;
+                document.querySelector('[data-lang="en"]').classList.add('selected');
+                document.querySelectorAll('.language-option').forEach(opt => {
+                    if (!opt.dataset.lang === 'en') opt.classList.remove('selected');
+                });
+                document.getElementById('timezone').value = 'Africa/Nairobi';
+                document.getElementById('currency').value = 'KES';
+                document.getElementById('dateFormat').value = 'DD/MM/YYYY';
+                document.getElementById('numberFormat').value = '1,234.56';
+                
+                showMessage('languageSuccess', 'Language settings reset to default values');
+            }
+        }
+
+        function setup2FA() {
+            alert('Two-Factor Authentication Setup:\n\n1. Download an authenticator app (Google Authenticator, Authy, etc.)\n2. Scan the QR code that would appear\n3. Enter the 6-digit verification code\n4. Save your backup codes securely\n\nThis is a demo - full 2FA would be implemented with backend services.');
+            
+            // Simulate enabling 2FA
+            document.getElementById('twoFAStatus').innerHTML = '<i class="fas fa-check-circle"></i> Enabled';
+            document.getElementById('twoFAStatus').style.color = 'var(--success-green)';
+            showMessage('securitySuccess', '2FA has been enabled for your account!');
+        }
+
+        function show2FAInfo() {
+            alert('Two-Factor Authentication (2FA) Information:\n\n• Adds an extra layer of security to your account\n• Requires both your password and a code from your phone\n• Protects against unauthorized access even if your password is compromised\n• Uses time-based codes that change every 30 seconds\n• Backup codes provided for emergency access\n\nHighly recommended for all users!');
+        }
+
+        function viewFullLoginHistory() {
+            alert('Login History:\n\n• Today, 2:30 PM - Chrome, Nairobi, Kenya (Current)\n• Yesterday, 9:15 AM - Safari, Nairobi, Kenya\n• Dec 15, 6:45 PM - Chrome, Mombasa, Kenya\n• Dec 14, 11:20 AM - Firefox, Nairobi, Kenya\n• Dec 13, 3:10 PM - Chrome Mobile, Nairobi, Kenya\n\nThis is a demo - full history would show more details and allow filtering.');
+        }
+
+        function logoutAllDevices() {
+            if (confirm('This will log you out of all devices and you\'ll need to sign in again everywhere. Continue?')) {
+                alert('You have been logged out of all devices. You will need to sign in again on other devices.');
+                showMessage('securitySuccess', 'Successfully logged out of all devices');
+            }
+        }
+
+        function viewActiveSessions() {
+            alert('Active Sessions:\n\n1. Current Session\n   • Chrome on Windows\n   • Nairobi, Kenya\n   • Active now\n\n2. Mobile Session\n   • Safari on iPhone\n   • Nairobi, Kenya\n   • Last active: 2 hours ago\n\nThis is a demo - real implementation would show detailed session management.');
+        }
+
+        function saveNotificationSettings() {
+            const settings = {
+                securityEmails: document.getElementById('securityEmails').checked,
+                propertyEmails: document.getElementById('propertyEmails').checked,
+                agentEmails: document.getElementById('agentEmails').checked,
+                marketingEmails: document.getElementById('marketingEmails').checked,
+                systemEmails: document.getElementById('systemEmails').checked,
+                securitySMS: document.getElementById('securitySMS').checked,
+                appointmentSMS: document.getElementById('appointmentSMS').checked,
+                urgentPropertySMS: document.getElementById('urgentPropertySMS').checked,
+                browserNotifications: document.getElementById('browserNotifications').checked,
+                soundNotifications: document.getElementById('soundNotifications').checked
+            };
+            
+            localStorage.setItem('luxnest_notification_settings', JSON.stringify(settings));
+            showMessage('notificationSuccess', 'Notification preferences saved successfully!');
+        }
+
+        function testNotifications() {
+            showMessage('notificationSuccess', 'Test notification sent! Check your email and phone for test messages.');
+            
+            // Request browser notification permission if not already granted
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification('Luxnest-Realty Test', {
+                            body: 'This is a test notification from your account settings.',
+                            icon: '/favicon.ico'
+                        });
+                    }
+                });
+            } else if (Notification.permission === 'granted') {
+                new Notification('Luxnest-Realty Test', {
+                    body: 'This is a test notification from your account settings.',
+                    icon: '/favicon.ico'
+                });
+            }
+        }
+
+        function savePrivacySettings() {
+            const settings = {
+                publicProfile: document.getElementById('publicProfile').checked,
+                contactVisibility: document.getElementById('contactVisibility').checked,
+                searchVisibility: document.getElementById('searchVisibility').checked,
+                analyticsData: document.getElementById('analyticsData').checked,
+                personalizedRecs: document.getElementById('personalizedRecs').checked,
+                locationTracking: document.getElementById('locationTracking').checked
+            };
+            
+            localStorage.setItem('luxnest_privacy_settings', JSON.stringify(settings));
+            showMessage('privacySuccess', 'Privacy settings updated successfully!');
+        }
+
+        function exportPersonalData() {
+            const userData = {
+                profile: currentUser,
+                settings: {
+                    language: JSON.parse(localStorage.getItem('luxnest_language_settings') || '{}'),
+                    notifications: JSON.parse(localStorage.getItem('luxnest_notification_settings') || '{}'),
+                    privacy: JSON.parse(localStorage.getItem('luxnest_privacy_settings') || '{}'),
+                    preferences: JSON.parse(localStorage.getItem('luxnest_preferences') || '{}'),
+                    theme: localStorage.getItem('luxnest_theme') || 'light'
+                },
+                exportDate: new Date().toISOString(),
+                exportVersion: '1.0'
+            };
+            
+            const dataStr = JSON.stringify(userData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `luxnest-data-export-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showMessage('privacySuccess', 'Your data has been exported and downloaded!');
+        }
+
+        function viewDataUsage() {
+            alert('Data Usage Summary:\n\n• Profile Information: 2.3 KB\n• Search History: 15.7 KB\n• Saved Properties: 8.2 KB\n• Communication History: 12.1 KB\n• Settings & Preferences: 1.8 KB\n• Login History: 3.4 KB\n\nTotal Data Stored: 43.5 KB\n\nThis is a demo - real implementation would show detailed breakdowns.');
+        }
+
+        function requestDataDeletion() {
+            if (confirm('Request complete data deletion? This will:\n\n• Delete all your personal information\n• Remove your search and communication history\n• Cancel any active property inquiries\n• Permanently close your account\n\nThis action cannot be undone. Continue?')) {
+                alert('Data deletion request submitted. You will receive a confirmation email within 24 hours. Your data will be permanently deleted within 30 days as required by privacy regulations.');
+                showMessage('privacySuccess', 'Data deletion request submitted successfully');
+            }
+        }
+
+        function savePreferences() {
+            const preferences = {
+                defaultPropertyType: document.getElementById('defaultPropertyType').value,
+                defaultLocation: document.getElementById('defaultLocation').value,
+                budgetRange: document.getElementById('budgetRange').value,
+                resultsPerPage: document.getElementById('resultsPerPage').value,
+                darkMode: document.getElementById('darkModeToggle').checked,
+                compactView: document.getElementById('compactView').checked,
+                autoplayVideos: document.getElementById('autoplayVideos').checked
+            };
+            
+            localStorage.setItem('luxnest_preferences', JSON.stringify(preferences));
+            showMessage('preferencesSuccess', 'Application preferences saved successfully!');
+        }
+
+        function resetPreferences() {
+            if (confirm('Reset all preferences to default values?')) {
+                document.getElementById('defaultPropertyType').value = '';
+                document.getElementById('defaultLocation').value = '';
+                document.getElementById('budgetRange').value = '';
+                document.getElementById('resultsPerPage').value = '12';
+                document.getElementById('darkModeToggle').checked = false;
+                document.getElementById('compactView').checked = false;
+                document.getElementById('autoplayVideos').checked = false;
+                
+                showMessage('preferencesSuccess', 'Preferences reset to default values');
+            }
+        }
+
+        function upgradeToPremium() {
+            alert('Premium Upgrade:\n\nMonthly Plan: KES 2,999/month\nAnnual Plan: KES 29,999/year (Save 17%)\n\nPremium Benefits:\n• Priority customer support\n• Advanced search filters\n• Exclusive property listings\n• Personal property consultant\n• Market insights & reports\n• Unlimited saved properties\n• Ad-free experience\n\nContact our sales team at premium@luxnest-realty.com or call +254 700 000 000 for more information.');
+        }
+
+        function deactivateAccount() {
+            if (confirm('Deactivate your account? This will:\n\n• Hide your profile from agents\n• Pause all notifications\n• Disable property alerts\n• Keep your data safe for reactivation\n\nYou can reactivate anytime by logging in. Continue?')) {
+                alert('Account deactivated successfully. You can reactivate by logging in anytime.');
+                showMessage('accountSuccess', 'Account has been deactivated');
+            }
+        }
+
+        function deleteAccount() {
+            if (confirm('⚠️ PERMANENT ACCOUNT DELETION ⚠️\n\nThis will PERMANENTLY delete:\n• Your profile and personal information\n• All saved properties and searches\n• Communication history with agents\n• Account settings and preferences\n• Login credentials\n\nThis action CANNOT be undone!\n\nAre you absolutely sure?')) {
+                const finalConfirm = prompt('To confirm deletion, please type "DELETE ACCOUNT" exactly:');
+                if (finalConfirm === 'DELETE ACCOUNT') {
+                    localStorage.removeItem('luxnest_user');
+                    localStorage.removeItem('luxnest_users');
+                    alert('Your account has been permanently deleted. You will be redirected to the home page.');
+                    window.location.href = 'home.html';
+                } else {
+                    alert('Account deletion cancelled - text did not match exactly.');
+                }
+            }
+        }
+
+        // Event listeners
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                switchSection(sectionId);
+            });
+        });
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.language-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                this.querySelector('input').checked = true;
+            });
+        });
+
+        // Dark mode toggle sync
+        document.getElementById('darkModeToggle').addEventListener('change', function() {
+            if (this.checked && currentTheme === 'light') {
+                toggleTheme();
+            } else if (!this.checked && currentTheme === 'dark') {
+                toggleTheme();
+            }
+        });
+
+        // Profile form submission
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const updatedUser = {
+                ...currentUser,
+                firstName: document.getElementById('profileFirstName').value,
+                lastName: document.getElementById('profileLastName').value,
+                name: `${document.getElementById('profileFirstName').value} ${document.getElementById('profileLastName').value}`,
+                email: document.getElementById('profileEmail').value,
+                phone: document.getElementById('profilePhone').value,
+                dateOfBirth: document.getElementById('profileDateOfBirth').value,
+                gender: document.getElementById('profileGender').value,
+                address: document.getElementById('profileAddress').value,
+                bio: document.getElementById('profileBio').value
+            };
+            
+            // Update user in localStorage
+            localStorage.setItem('luxnest_user', JSON.stringify(updatedUser));
+            currentUser = updatedUser;
+            
+            // Update users array
+            const users = JSON.parse(localStorage.getItem('luxnest_users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex] = updatedUser;
+                localStorage.setItem('luxnest_users', JSON.stringify(users));
+            }
+            
+            // Update avatar
+            const initials = `${updatedUser.firstName?.[0] || ''}${updatedUser.lastName?.[0] || ''}` || 'U';
+            document.getElementById('userAvatar').textContent = initials.toUpperCase();
+            document.getElementById('profilePhoto').innerHTML = `${initials.toUpperCase()}<div class="photo-overlay"><i class="fas fa-camera" style="font-size: 1.5rem;"></i></div>`;
+            
+            showMessage('profileSuccess', 'Profile updated successfully!');
+        });
+
+        // Password form submission
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmNewPassword').value;
+            
+            // Validate current password
+            if (currentPassword !== currentUser.password) {
+                showMessage('securityError', 'Current password is incorrect', 'error');
+                return;
+            }
+            
+            // Validate new password
+            if (newPassword.length < 8) {
+                showMessage('securityError', 'New password must be at least 8 characters long', 'error');
+                return;
+            }
+            
+            if (checkPasswordStrength(newPassword) < 3) {
+                showMessage('securityError', 'Password is too weak. Please use a stronger password.', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showMessage('securityError', 'New passwords do not match', 'error');
+                return;
+            }
+            
+            // Update password
+            currentUser.password = newPassword;
+            localStorage.setItem('luxnest_user', JSON.stringify(currentUser));
+            
+            // Update users array
+            const users = JSON.parse(localStorage.getItem('luxnest_users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem('luxnest_users', JSON.stringify(users));
+            }
+            
+            // Clear form
+            document.getElementById('passwordForm').reset();
+            document.getElementById('strengthFill').className = 'strength-fill';
+            document.getElementById('strengthText').textContent = 'Password strength will appear here';
+            
+            showMessage('securitySuccess', 'Password changed successfully!');
+        });
+
+        // Password strength checking
+        document.getElementById('newPassword').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate profile form
+            populateProfileForm();
+            
+            // Update user avatar
+            const initials = `${currentUser.firstName?.[0] || ''}${currentUser.lastName?.[0] || ''}` || currentUser.name?.split(' ').map(n => n[0]).join('') || 'U';
+            document.getElementById('userAvatar').textContent = initials.toUpperCase();
+            document.getElementById('profilePhoto').innerHTML = `${initials.toUpperCase()}<div class="photo-overlay"><i class="fas fa-camera" style="font-size: 1.5rem;"></i></div>`;
+            
+            // Set member since date
+            const memberSince = new Date(currentUser.registrationDate || Date.now()).toLocaleDateString('en-GB', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('memberSince').textContent = memberSince;
+            
+            // Load saved settings
+            const languageSettings = JSON.parse(localStorage.getItem('luxnest_language_settings') || '{}');
+            if (languageSettings.language) {
+                document.querySelector(`input[value="${languageSettings.language}"]`).checked = true;
+                document.querySelector(`[data-lang="${languageSettings.language}"]`).classList.add('selected');
+                document.querySelectorAll('.language-option').forEach(opt => {
+                    if (opt.dataset.lang !== languageSettings.language) opt.classList.remove('selected');
+                });
+            }
+            if (languageSettings.timezone) document.getElementById('timezone').value = languageSettings.timezone;
+            if (languageSettings.currency) document.getElementById('currency').value = languageSettings.currency;
+            if (languageSettings.dateFormat) document.getElementById('dateFormat').value = languageSettings.dateFormat;
+            if (languageSettings.numberFormat) document.getElementById('numberFormat').value = languageSettings.numberFormat;
+            
+            // Load notification settings
+            const notificationSettings = JSON.parse(localStorage.getItem('luxnest_notification_settings') || '{}');
+            Object.keys(notificationSettings).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) element.checked = notificationSettings[key];
+            });
+            
+            // Load privacy settings
+            const privacySettings = JSON.parse(localStorage.getItem('luxnest_privacy_settings') || '{}');
+            Object.keys(privacySettings).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) element.checked = privacySettings[key];
+            });
+            
+            // Load preferences
+            const preferences = JSON.parse(localStorage.getItem('luxnest_preferences') || '{}');
+            Object.keys(preferences).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = preferences[key];
+                    } else {
+                        element.value = preferences[key];
+                    }
+                }
+            });
+            
+            // Check for stored theme
+            const storedTheme = localStorage.getItem('luxnest_theme');
+            if (storedTheme) {
+                currentTheme = storedTheme;
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                const themeIcon = document.querySelector('.theme-toggle i');
+                themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+                document.getElementById('darkModeToggle').checked = currentTheme === 'dark';
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e6cae6a34f5bc4',t:'MTc1NTA3MzIxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
